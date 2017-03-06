@@ -5,9 +5,31 @@
     <title>请求--API</title>
   </head>
   <body>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/core.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
     <script>
-    
+    $(function(){
+      var url = "http://music.163.com/api/playlist/detail?id=1612159";
+
+      function getContent(url){
+        $.ajax({
+          url : url,
+          type : "GET",
+          async : true,
+          success : function(data){
+            console.log(data);
+            processData(data);
+          },
+          error : function(e){
+            console.log(e);
+          }
+        });
+      }
+
+      // 处理数据
+      function processData(data){
+        console.log(data);
+      }
+    });
     </script>
   </body>
 </html>
