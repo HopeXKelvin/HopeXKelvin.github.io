@@ -3,35 +3,68 @@
   <head>
     <meta charset="utf-8">
     <title>请求--API</title>
+    <meta http-equiv="X-UA-Compatible" content="IE-Edge">
   </head>
   <body>
+    <h1>crossdomain using JSONP</h1>
+    <button id="get_resource">Click to get resource</button>
+    <p id="resource_holder"></p>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
     <script>
     $(function(){
-      var url = "http://music.163.com/api/playlist/detail?id=1612159";
+      // var url = "http://music.163.com/api/playlist/detail?id=1612159";
+      //
+      // function getContent(url){
+      //   $.ajax({
+      //     url : url,
+      //     type : "GET",
+      //     async : true,
+      //     success : function(data){
+      //       console.log(data);
+      //       processData(data);
+      //     },
+      //     error : function(e){
+      //       console.log(e);
+      //     }
+      //   });
+      // }
+      //
+      // // 处理数据
+      // function processData(data){
+      //   console.log(data);
+      // }
+      //
+      // // 启动
+      // getContent(url);
 
-      function getContent(url){
-        $.ajax({
-          url : url,
-          type : "GET",
-          async : true,
-          success : function(data){
-            console.log(data);
-            processData(data);
-          },
-          error : function(e){
-            console.log(e);
+      // 使用jsonp，进行跨域资源的调用
+      var getJSONP = function(url,callbackName){
+        var head = document.getElementsByTagName("head")[0],
+            script = document.createElement("script");
+        script.src = url + '?callback=' + callbackName;
+        script.charset = "utf-8";
+
+        script.onload = script.onreadystatechange = function(){
+          if(!this.readyState || this.readyState == "loaded" || this.readyState == "complete"){
+            setTimeout(function(){
+              head.removeChild(script);
+            },50);
           }
-        });
-      }
+        };
+        head.appendChild(script);
+      };
 
-      // 处理数据
-      function processData(data){
+      var holder = document.getElementById("resource_holder");
+      var button = document.getElementById("get_resource");
+
+      window.handleJSONP = function(data){
         console.log(data);
-      }
+      };
 
-      // 启动
-      getContent(url);
+      button.onclick = function(){
+        holder.innerHTML = '';
+        getJSONP("http://music.163.com/api/playlist/detail?id=1612159",'handleJSONP');
+      };
     });
     </script>
   </body>
