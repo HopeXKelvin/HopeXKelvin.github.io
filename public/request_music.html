@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <title>请求--API</title>
     <meta http-equiv="X-UA-Compatible" content="IE-Edge">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
   </head>
   <body>
     <h1>crossdomain using JSONP</h1>
@@ -15,7 +16,7 @@
 
       // 正常方式请求
       function requestNormal(){
-        var url = "https://music.163.com/api/playlist/detail?id=1612159";
+        var url = "http://172.93.33.53:8090/get_music_list";
         function getContent(url){
           $.ajax({
             url : url,
@@ -66,7 +67,7 @@
 
         button.onclick = function(){
           holder.innerHTML = '';
-          getJSONP("https://music.163.com/api/playlist/detail?id=1612159",'handleJSONP');
+          getJSONP("http://172.93.33.53:8090/get_music_list",'handleJSONP');
         };
       }
 
