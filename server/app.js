@@ -22,51 +22,39 @@ httpsServer.listen(SSLPORT,function(){
 });
 
 var requestUrl = {
-  "cloud_music_api" : "https://music.163.com/api/playlist/detail?id=1612159"
+  "cloud_music_list" : "https://music.163.com/api/playlist/detail?id=1612159",
+  "cloud_music_lyric" : ""
 };
 var outerRequest = {
-  "request_music" : "/get_music_list"
+  "request_music" : "/get_music_list",
+  "request_lyric" : "/get_music_lyric"
 };
 
-// app.listen(port,function(){
-//   console.log("listening on port " + port);
-// });
-//
-// // 请求网易云的api,获取数据
+// 请求网易云的歌单API,获取数据
 app.get(outerRequest.request_music,function(req,res){
   if(req.protocol === 'https'){
     // res.status(200).send("Welcome to Safety Land!");
     console.log("请求网易云音乐列表!");
-    // console.log(requestMusicList(requestUrl.cloud_music_api));
-    res.send(requestMusicList(requestUrl.cloud_music_api));
+    console.log(req.query);
+    var _callback = req.query.callback;
+    if(_callback){
+      console.log("参数中有回掉函数!");
+      var apiURL = requestUrl.cloud_music_list;
+      // 发送 http请求，获取真正需要的内容
+      request(apiURL, function(error,response,body){
+        console.log('error:', error); // Print the error if one occurred
+        console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
+        var infos = body;
+        // console.log(infos);
+        res.type("text/javascript");
+        res.send(_callback + '('+ JSON.stringify(infos) +')');
+      });
+    }else{
+      res.send("没有JSONP回掉函数!");
+    }
+    // res.send(requestMusicList(requestUrl.cloud_music_list));
   }else{
     res.status(200).send("Welcome");
   }
-})
-
-// 接收https请求
-// https.get(outerRequest.request_music,function(res){
-//   console.log('statusCode:',res.statusCode);
-//   console.log('headers:',res.headers);
-//
-// });
-
-// 用http来接收请求，并使用 request和它的 pipe()方法
-// http.createServer(function(req,resp){
-//   if(req.url === "get_music_list"){
-//     var x = request(requestUrl.cloud_music_api);
-//     req.pipe(x);
-//     x.pipe(resp);
-//   }
-// });
-
-
-function requestMusicList(url){
-  // 发送 http请求，获取需要的内容
-  request(url, function(error,response,body){
-    console.log('error:', error); // Print the error if one occurred
-    console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-    console.log('body:', body); // Print the HTML for the Google homepage.
-    return body;
-  });
-}
+});
+// 请求网易云的歌曲API，这里主要是获取歌词
