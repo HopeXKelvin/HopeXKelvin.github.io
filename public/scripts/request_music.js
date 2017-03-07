@@ -47,7 +47,8 @@ $(function(){
     var button = document.getElementById("get_resource");
 
     window.handleJSONP = function(data){
-      console.log(data);
+      // console.log(data);
+      genMusicTable(data)
     };
 
     button.onclick = function(){
@@ -58,5 +59,12 @@ $(function(){
 
   window.requestNormal = requestNormal;
   window.requestJSONP = requestJSONP;
+  requestJSONP();
+
+  function genMusicTable(data){
+    var musicListApp = new Vue({
+      
+    });
+  }
 
 });
