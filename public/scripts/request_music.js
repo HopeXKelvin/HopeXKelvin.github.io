@@ -63,7 +63,7 @@ $(function(){
 
   function genMusicTable(data){
     var musicListApp = new Vue({
-      
+
     });
   }
 
