@@ -16,7 +16,7 @@
 
       // 正常方式请求
       function requestNormal(){
-        var url = "http://172.93.33.53:8090/get_music_list";
+        var url = "https://172.93.33.53:8090/get_music_list";
         function getContent(url){
           $.ajax({
             url : url,
@@ -67,7 +67,7 @@
 
         button.onclick = function(){
           holder.innerHTML = '';
-          getJSONP("http://172.93.33.53:8090/get_music_list",'handleJSONP');
+          getJSONP("https://172.93.33.53:8090/get_music_list",'handleJSONP');
         };
       }
 
