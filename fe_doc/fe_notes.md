@@ -1,4 +1,6 @@
-# 关于继承  
+# FE-学习笔记  
+
+### 关于继承  
 
 > 原型链：对象实例会集成其原型对象上的属性，原型对象也是一个对象，它也会集成它自己的原型对象拥有的属性，依此类推，这就是原型链。  
 
@@ -10,7 +12,7 @@ var prototype = Object.getPrototypeOf(book);
 console.log(prototype === Object.prototype);// true
 ```  
 
-# 关于 call,apply,bind方法  
+### 关于 call,apply,bind方法  
 
 > 每个函数都包含两个非继承而来的方法：call()和apply()。这两个方法的用途都是在特定的作用域中调用函数，实际上等于设置函数体内this对象的值。  
 
