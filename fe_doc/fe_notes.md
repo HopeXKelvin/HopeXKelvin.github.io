@@ -104,4 +104,16 @@
 
 就会有下面的显示:  
 
-![img](http://p1.bqimg.com/567571/338ce06a302e95f6.png)
+![img](http://p1.bqimg.com/567571/338ce06a302e95f6.png)  
+
+### 关于物理像素,设备独立像素等内容的概念  
+> 物理像素  
+
+> 设备独立像素  
+
+> 设备像素比(device pixel ratio)  
+> 设备像素比=物理像素/设备独立像素  
+> JS中可以通过 window.devicePixelRatio 获取到当前设备的dpr  
+> css中可以通过 -webkit-device-pixel-ratio,-webkit-min-device-pixel-ratio,-webkit-max-device-pixel-ratio 进行媒体查询，对不同dpr的设备，做一些样式适配(这里只针对webkit内核的浏览器和webview)  
+
+[像素点](http://www.html-js.com/article/Mobile-terminal-H5-mobile-terminal-HD-multi-screen-adaptation-scheme%203041)
