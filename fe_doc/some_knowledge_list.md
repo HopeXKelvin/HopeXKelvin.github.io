@@ -19,10 +19,14 @@
 9. jquery的 delegate()方法的使用  
 
 10. Object有哪些方法?  
-> - constructor()
+  - constructor()
   - hasOwnProperty()
   - isPrototypeOf()
   - propertyIsEnumerable()
   - toLocaleString()
   - toString()
   - valueOf()
+
+11. mock数据怎么处理  
+
+12. 写一个once函数，只执行一次函数  
