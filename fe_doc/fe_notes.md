@@ -7,9 +7,9 @@
 > 所有的对象，包括那些自己定义的对象都自动继承自Object，除非另有指定(这里的另有指定是什么意思?).更确切的说，所有对象都继承自 Object.prototype  
 
 ```javascript  
-var book = {title : "Learning Javascript"};
-var prototype = Object.getPrototypeOf(book);
-console.log(prototype === Object.prototype);// true
+  var book = {title : "Learning Javascript"};
+  var prototype = Object.getPrototypeOf(book);
+  console.log(prototype === Object.prototype);// true
 ```  
 
 ### 关于 call,apply,bind方法  
@@ -23,35 +23,85 @@ console.log(prototype === Object.prototype);// true
 > ES5中还定义了一个 bind方法，这个方法会创建一个函数的实例，其this值会被绑定到传给bind()函数的值。
 
 ```javascript
-function sum(num1,num2){
-  return num1+num2;
-}
+  function sum(num1,num2){
+    return num1+num2;
+  }
 
-// apply() 调用 第二个参数可以是arguments 或者 参数数组
-function callSum1(num1,num2){
-  sum.apply(this,[num1,num2]);
-}
+  // apply() 调用 第二个参数可以是arguments 或者 参数数组
+  function callSum1(num1,num2){
+    sum.apply(this,[num1,num2]);
+  }
 
-function callSum2(num1,num2){
-  sum.apply(this,arguments);
-}
+  function callSum2(num1,num2){
+    sum.apply(this,arguments);
+  }
 
-// call() 调用 除了第一个参数外，其余的参数需要一一列举出来
-function callSum3(num1,num2){
-  sum.call(this,num1,num2);
-}
+  // call() 调用 除了第一个参数外，其余的参数需要一一列举出来
+  function callSum3(num1,num2){
+    sum.call(this,num1,num2);
+  }
 
-// bind()的使用实例
-window.color = "red";
-var obj = {
-  color : "blue"
-};
+  // bind()的使用实例
+  window.color = "red";
+  var obj = {
+    color : "blue"
+  };
 
-function sayColor(){
-  console.log(this.color);
-}
+  function sayColor(){
+    console.log(this.color);
+  }
 
-var fnSayColor = sayColor.bind(obj);
-fnSayColor();// blue
+  var fnSayColor = sayColor.bind(obj);
+  fnSayColor();// blue
+```  
 
-```
+### 关于 echarts的简单入门使用代码：  
+
+简单使用echarts:  
+
+```html
+  <!DOCTYPE html>
+  <html>
+  <head>
+      <meta charset="utf-8">
+      <title>ECharts</title>
+      <!-- 引入 echarts.js -->
+      <script src="echarts.min.js"></script>
+  </head>
+  <body>
+      <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+      <div id="main" style="width: 600px;height:400px;"></div>
+      <script type="text/javascript">
+          // 基于准备好的dom，初始化echarts实例
+          var myChart = echarts.init(document.getElementById('main'));
+
+          // 指定图表的配置项和数据
+          var option = {
+              title: {
+                  text: 'ECharts 入门示例'
+              },
+              tooltip: {},
+              legend: {
+                  data:['销量']
+              },
+              xAxis: {
+                  data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
+              },
+              yAxis: {},
+              series: [{
+                  name: '销量',
+                  type: 'bar',
+                  data: [5, 20, 36, 10, 10, 20]
+              }]
+          };
+
+          // 使用刚指定的配置项和数据显示图表。
+          myChart.setOption(option);
+      </script>
+  </body>
+  </html>
+```  
+
+就会有下面的显示:  
+
+![img](http://p1.bqimg.com/567571/338ce06a302e95f6.png)
