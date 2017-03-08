@@ -1,4 +1,11 @@
 # 关于继承  
+
 > 原型链：对象实例会集成其原型对象上的属性，原型对象也是一个对象，它也会集成它自己的原型对象拥有的属性，依此类推，这就是原型链。  
 
-> 所有的对象，包括那些自己定义的对象都自动继承自Object，除非另有指定(这里的另有指定是什么意思?).更确切的说，所有对象都继承自 Object.prototype
+> 所有的对象，包括那些自己定义的对象都自动继承自Object，除非另有指定(这里的另有指定是什么意思?).更确切的说，所有对象都继承自 Object.prototype  
+
+```javascript  
+var book = {title : "Learning Javascript"};
+var prototype = Object.getPrototypeOf(book);
+console.log(prototype === Object.prototype);// true
+```
