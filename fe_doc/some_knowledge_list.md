@@ -17,3 +17,12 @@
 8. 移动端页面:em 和 rem的区别  
 
 9. jquery的 delegate()方法的使用  
+
+10. Object有哪些方法?  
+> - constructor()
+  - hasOwnProperty()
+  - isPrototypeOf()
+  - propertyIsEnumerable()
+  - toLocaleString()
+  - toString()
+  - valueOf()
