@@ -1,6 +1,9 @@
 # FE-学习笔记  
 
-### 关于继承  
+## 目录：
+> [关于继承](#inheritance)
+
+### <span id="inheritance">关于继承 </span> 
 
 > 原型链：对象实例会集成其原型对象上的属性，原型对象也是一个对象，它也会集成它自己的原型对象拥有的属性，依此类推，这就是原型链。  
 
@@ -116,4 +119,6 @@
 > JS中可以通过 window.devicePixelRatio 获取到当前设备的dpr  
 > css中可以通过 -webkit-device-pixel-ratio,-webkit-min-device-pixel-ratio,-webkit-max-device-pixel-ratio 进行媒体查询，对不同dpr的设备，做一些样式适配(这里只针对webkit内核的浏览器和webview)  
 
-[像素点](http://www.html-js.com/article/Mobile-terminal-H5-mobile-terminal-HD-multi-screen-adaptation-scheme%203041)
+[像素点](http://www.html-js.com/article/Mobile-terminal-H5-mobile-terminal-HD-multi-screen-adaptation-scheme%203041)  
+
+### box-sizing属性
