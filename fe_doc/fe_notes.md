@@ -121,4 +121,46 @@
 
 [像素点](http://www.html-js.com/article/Mobile-terminal-H5-mobile-terminal-HD-multi-screen-adaptation-scheme%203041)  
 
-### box-sizing属性
+### box-sizing属性  
+
+### JS运算符的优先级  
+> 结合性:  
+a OP b OP c  
+左联合(从左到右计算) : (a OP b) OP c  
+右联合(从右到左计算) : a OP (b OP c)  
+JS中赋值运算符是右关联的，所以可以这么写：  
+```javascript
+  a = b = 5;//结果是 a,b的值都会成为5
+```  
+
+优先级的汇总表如下：
+
+![](http://p1.bqimg.com/567571/1744004bd4096de5.png)  
+
+![](http://p1.bqimg.com/567571/a9879812e0ade85e.png)  
+
+![](http://p1.bpimg.com/567571/d86c2b0a3d7f9811.png)  
+
+
+### 一道有趣的JS代码题：  
+```javascript
+  function Foo(){
+    getName = function(){ console.log(1); };
+    return this;
+  }
+  Foo.getName = function(){ console.log(2); };
+  Foo.prototype.getName = function(){ console.log(3); };
+  var getName = function(){ console.log(4); };
+  function getName(){
+    console.log(5);
+  }
+
+  // 写出下面的输出结果
+  Foo.getName();
+  getName();
+  Foo().getName();
+  getName();
+  new Foo.getName();
+  new Foo().getName();
+  new new Foo().getName();
+```
