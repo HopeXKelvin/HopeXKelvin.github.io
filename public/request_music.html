@@ -5,6 +5,7 @@
     <title>Neteasy_Cloud_Music</title>
     <meta http-equiv="X-UA-Compatible" content="IE-Edge">
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <link rel="stylesheet" href="styles/css/netease_music.css">
   </head>
   <body>
     <h1>NetEaseCloudMusic歌单显示-通过API请求数据显示</h1>
@@ -20,11 +21,11 @@
           <th>Song_artist</th>
           <th>Song_url</th>
         </tr>
-        <tr v-for="item in songList">
-          <td>{{ item.id }}</td>
-          <td>{{ item.songName }}</td>
-          <td>{{ item.songArtist }}</td>
-          <td>{{ item.songUrl }}</td>
+        <tr class="tab-content-row" v-for="item in songList">
+          <td class="tab-cell-id">{{ item.id }}</td>
+          <td class="tab-cell-songname">{{ item.songName }}</td>
+          <td class="tab-cell-artist">{{ item.songArtist }}</td>
+          <td class="tab-cell-songurl">{{ item.songUrl }}</td>
         </tr>
       </table>
     </div>
