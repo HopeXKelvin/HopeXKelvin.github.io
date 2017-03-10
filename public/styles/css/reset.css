@@ -3,4 +3,8 @@ html, body, ul, ol {
   padding: 0;
   box-sizing: content-box; }
 
+
+body{
+  background-color: #aaa;
+}
 /*# sourceMappingURL=reset.css.map */
