@@ -1,7 +1,7 @@
 $(function(){
   // 整个展示网易云歌单信息的vue 对象
   var musicListApp = new Vue({
-    el : "#songInfoTable",
+    el : "#app",
     data : {
       listName : "",
       songList : []
