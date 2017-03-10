@@ -1,7 +1,13 @@
 # FE-学习笔记  
 
 ## 目录：
-> [关于继承](#inheritance)
+> [关于继承](#inheritance)  
+> [关于 call,apply,bind方法](#call_apply_bind)  
+> [关于 echarts的简单入门使用代码](#about_echarts)  
+> [关于物理像素,设备独立像素等内容的概念](#about_pixel)  
+> [box-sizing属性](#box_sizing)  
+> [JS运算符的优先级](#operator)  
+> [一道有趣的JS代码题：](#js_problem_1)
 
 ### <span id="inheritance">关于继承 </span>
 
@@ -15,7 +21,7 @@
   console.log(prototype === Object.prototype);// true
 ```  
 
-### 关于 call,apply,bind方法  
+### <span id="call_apply_bind">关于 call,apply,bind方法</span>  
 
 > 每个函数都包含两个非继承而来的方法：call()和apply()。这两个方法的用途都是在特定的作用域中调用函数，实际上等于设置函数体内this对象的值。  
 
@@ -58,7 +64,7 @@
   fnSayColor();// blue
 ```  
 
-### 关于 echarts的简单入门使用代码：  
+### <span id="about_echarts">关于 echarts的简单入门使用代码：</span>   
 
 简单使用echarts:  
 
@@ -109,7 +115,7 @@
 
 ![img](http://p1.bqimg.com/567571/338ce06a302e95f6.png)  
 
-### 关于物理像素,设备独立像素等内容的概念  
+### <span id="about_pixel">关于物理像素,设备独立像素等内容的概念</span>  
 > 物理像素  
 
 > 设备独立像素  
@@ -121,4 +127,46 @@
 
 [像素点](http://www.html-js.com/article/Mobile-terminal-H5-mobile-terminal-HD-multi-screen-adaptation-scheme%203041)  
 
-### box-sizing属性
+### <span id="box_sizing">box-sizing属性</span>  
+
+### <span id="operator">JS运算符的优先级</span>  
+> 结合性:  
+a OP b OP c  
+左联合(从左到右计算) : (a OP b) OP c  
+右联合(从右到左计算) : a OP (b OP c)  
+JS中赋值运算符是右关联的，所以可以这么写：  
+```javascript
+  a = b = 5;//结果是 a,b的值都会成为5
+```  
+
+优先级的汇总表如下：
+
+![](http://p1.bqimg.com/567571/1744004bd4096de5.png)  
+
+![](http://p1.bqimg.com/567571/a9879812e0ade85e.png)  
+
+![](http://p1.bpimg.com/567571/d86c2b0a3d7f9811.png)  
+
+
+### <span id="js_problem_1">一道有趣的JS代码题：</span>  
+```javascript
+  function Foo(){
+    getName = function(){ console.log(1); };
+    return this;
+  }
+  Foo.getName = function(){ console.log(2); };
+  Foo.prototype.getName = function(){ console.log(3); };
+  var getName = function(){ console.log(4); };
+  function getName(){
+    console.log(5);
+  }
+
+  // 写出下面的输出结果
+  Foo.getName();
+  getName();
+  Foo().getName();
+  getName();
+  new Foo.getName();
+  new Foo().getName();
+  new new Foo().getName();
+```
