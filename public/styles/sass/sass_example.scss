@@ -32,3 +32,63 @@ nav {
 
 // 3.导入
 // 在sass文件中可以导入其他的sass文件，最后编译为一个css文件
+@import 'reset';
+
+// 4.mixin
+// sass 中可以使用mixin定义一些代码片段，且可传参数，方便日后根据需要去调用。从此处理css3的前缀兼容就变得更加轻松便捷
+@mixin box-sizing($sizing){
+  -webkit-box-sizing:$sizing;
+  -moz-box-sizing:$sizing;
+  box-sizing: $sizing;
+}
+
+.box-border{
+  border: 1px solid #ddd;
+  @include box-sizing(border-box);
+}
+
+// 5.扩展和继承
+.message{
+  border: 1px solid #ccc;
+  padding: 10px;
+  color: #333;
+}
+
+.success{
+  @extend .message;
+  border-color: green;
+}
+.error{
+  @extend .message;
+  border-color: red;
+}
+.warning{
+  @extend .message;
+  border-color: yellow;
+}
+
+// 6.运算
+.container{
+  width: 100%;
+}
+
+article[role="main"]{
+  float: left;
+  width: 600px/960px * 100%;
+}
+
+aside[role="complimentary"]{
+  float: right;
+  width: 300px/960px * 100%;
+}
+
+// 7.颜色
+// sass中集成了大量的颜色函数，让变换颜色更加简单
+$linkColor: #08c;
+a{
+  text-decoration: none;
+  color: $linkColor;
+  &:hover{
+    color: darken($linkColor, 10%);
+  }
+}

@@ -1,30 +1,4 @@
 $(function(){
-
-  // 正常方式请求
-  function requestNormal(){
-    var url = "https://172.93.33.53:8090/get_music_list";
-    function getContent(url){
-      $.ajax({
-        url : url,
-        type : "GET",
-        async : true,
-        success : function(data){
-          console.log(data);
-          processData(data);
-        },
-        error : function(e){
-          console.log(e);
-        }
-      });
-    }
-    // 处理数据
-    function processData(data){
-      console.log(data);
-    }
-    // 启动
-    getContent(url);
-  }
-
   // JSONP方式去请求
   function requestJSONP(){
     // 使用jsonp，进行跨域资源的调用
@@ -48,7 +22,8 @@ $(function(){
 
     window.handleJSONP = function(data){
       // console.log(data);
-      genMusicTable(data)
+      var realData = processData(data);
+      genMusicTable(realData)
     };
 
     button.onclick = function(){
@@ -59,12 +34,40 @@ $(function(){
 
   window.requestNormal = requestNormal;
   window.requestJSONP = requestJSONP;
-  requestJSONP();
 
+  // 用需要的有用信息去填充dom结构，第一步先展示简单的歌曲信息
   function genMusicTable(data){
     var musicListApp = new Vue({
-
+      el : "#songInfoTable",
+      data : {
+        songList : data
+      },
+      methods : {}
     });
   }
+  // 处理原始数据，使其变成需要的数据格式返回
+  function processData(originDatas){
+    var songList = originDatas.result.tracks;
+    var targetDatas = [];
+    for(var i=0;i<songList.length;i++){
+      var songInfo = {};
+      songInfo.id = songList[i].id;
+      songInfo.songName = songList[i].name;
+      songInfo.songArtist = getArtistToStr(songList[i].artists);
+      songInfo.songUrl = songList[i].mp3Url;
+      targetDatas.push(songInfo);
+    }
+    return targetDatas;
+  }
 
+  // 由于一首歌的artist数据对应是一个数组，可能有多个人一起演唱的歌，所以需要把数组的值取出来，拼接一下
+  function getArtistToStr(artistList){
+    var artistStr = "";
+    for(var i=0;i<artistList.length;i++){
+      artistStr += (" " + artistList[i].name);
+    }
+    return artistStr;
+  }
+
+  requestJSONP();
 });

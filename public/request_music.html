@@ -7,9 +7,25 @@
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
   </head>
   <body>
-    <h1>网易云歌单显示-通过API请求数据显示</h1>
+    <h1>NetEaseCloudMusic歌单显示-通过API请求数据显示</h1>
     <button id="get_resource">Click to get resource</button>
     <p id="resource_holder"></p>
+    <div class="main-content">
+      <table id="songInfoTable">
+        <tr>
+          <th>Id</th>
+          <th>Song_name</th>
+          <th>Song_artist</th>
+          <th>Song_url</th>
+        </tr>
+        <tr v-for="item in songList">
+          <td>{{ item.id }}</td>
+          <td>{{ item.songName }}</td>
+          <td>{{ item.songArtist }}</td>
+          <td>{{ item.songUrl }}</td>
+        </tr>
+      </table>
+    </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
     <script src="https://unpkg.com/vue/dist/vue.js"></script>
     <script src="scripts/request_music.js"></script>
