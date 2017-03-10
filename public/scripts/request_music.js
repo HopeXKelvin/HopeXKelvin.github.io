@@ -59,7 +59,7 @@ $(function(){
     }
     return {
       "title" : titleName,
-      "songList" targetDatas
+      "songList" : targetDatas
     };
   }
 
