@@ -169,4 +169,8 @@ JS中赋值运算符是右关联的，所以可以这么写：
   new Foo.getName();
   new Foo().getName();
   new new Foo().getName();
-```
+```  
+
+### <span id="someNotes">一些细节的小问题</span>  
+1. 需要注意的是，带src属性的<script>元素不应该在其<script>和</script>标签之间再包含额外的JS代码。就算嵌套了JS代码，也不会执行。而只会执行外部脚本文件。  
+2. 在<script>元素中设置defer属性，相当于告诉浏览器立即下载，但延迟执行  
