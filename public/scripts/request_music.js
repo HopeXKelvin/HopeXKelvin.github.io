@@ -38,7 +38,8 @@ $(function(){
     var musicListApp = new Vue({
       el : "#songInfoTable",
       data : {
-        songList : data
+        listName : data.title,
+        songList : data.songList
       },
       methods : {}
     });
@@ -46,6 +47,7 @@ $(function(){
   // 处理原始数据，使其变成需要的数据格式返回
   function processData(originDatas){
     var songList = originDatas.result.tracks;
+    var titleName = originDatas.result.name;
     var targetDatas = [];
     for(var i=0;i<songList.length;i++){
       var songInfo = {};
@@ -55,7 +57,10 @@ $(function(){
       songInfo.songUrl = songList[i].mp3Url;
       targetDatas.push(songInfo);
     }
-    return targetDatas;
+    return {
+      "title" : titleName,
+      "songList" targetDatas
+    };
   }
 
   // 由于一首歌的artist数据对应是一个数组，可能有多个人一起演唱的歌，所以需要把数组的值取出来，拼接一下
