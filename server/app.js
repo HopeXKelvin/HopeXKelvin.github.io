@@ -22,7 +22,7 @@ httpsServer.listen(SSLPORT,function(){
 });
 
 var requestUrl = {
-  "cloud_music_list" : "https://music.163.com/api/playlist/detail?id=1612159",
+  "cloud_music_list" : "https://music.163.com/api/playlist/detail?id=IDVALUE",
   "cloud_music_lyric" : ""
 };
 var outerRequest = {
@@ -32,6 +32,8 @@ var outerRequest = {
 
 // 请求网易云的歌单API,获取数据
 app.get(outerRequest.request_music,function(req,res){
+  var param = req.query;
+  var listId = param.listid;
   if(req.protocol === 'https'){
     // res.status(200).send("Welcome to Safety Land!");
     console.log("请求网易云音乐列表!");
@@ -39,7 +41,7 @@ app.get(outerRequest.request_music,function(req,res){
     var _callback = req.query.callback;
     if(_callback){
       console.log("参数中有回掉函数!");
-      var apiURL = requestUrl.cloud_music_list;
+      var apiURL = requestUrl.cloud_music_list.replace("IDVALUE",listId);// 替换参数 歌单ID
       // 发送 http请求，获取真正需要的内容
       request(apiURL, function(error,response,body){
         console.log('error:', error); // Print the error if one occurred

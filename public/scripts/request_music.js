@@ -29,10 +29,10 @@ $(function(){
 
     button.onclick = function(){
       holder.innerHTML = '';
-      getJSONP("https://172.93.33.53:8090/get_music_list",'handleJSONP');
+      var listId = document.getElementById("musicId").value;
+      getJSONP("https://172.93.33.53:8090/get_music_list?listid="+listId,'handleJSONP');
     };
   }
-
   // 用需要的有用信息去填充dom结构，第一步先展示简单的歌曲信息
   function genMusicTable(data){
     var musicListApp = new Vue({

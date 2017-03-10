@@ -8,9 +8,11 @@
   </head>
   <body>
     <h1>NetEaseCloudMusic歌单显示-通过API请求数据显示</h1>
+    <input type="text" name="musiclist_id" id="musicId">
     <button id="get_resource">Click to get resource</button>
     <p id="resource_holder"></p>
     <div class="main-content">
+      <h2 class="music_list_title">{{ listName }}</h2>
       <table id="songInfoTable">
         <tr>
           <th>Id</th>
