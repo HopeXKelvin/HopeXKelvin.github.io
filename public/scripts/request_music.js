@@ -5,7 +5,7 @@ $(function(){
     var getJSONP = function(url,callbackName){
       var head = document.getElementsByTagName("head")[0],
       script = document.createElement("script");
-      script.src = url + '?callback=' + callbackName;
+      script.src = url + '&callback=' + callbackName;
       script.charset = "utf-8";
       script.onload = script.onreadystatechange = function(){
         if(!this.readyState || this.readyState == "loaded" || this.readyState == "complete"){
