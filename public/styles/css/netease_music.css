@@ -8,11 +8,13 @@ html, body, ul, ol {
 
 .tab-content {
   text-align: center; }
-  .tab-content .tab-content-row {
-    cursor: pointer; }
-    .tab-content .tab-content-row:hover {
-      box-shadow: 0 0 5px 0px #000; }
-    .tab-content .tab-content-row .tab-cell-songurl {
-      text-align: center; }
+
+.tab-content-row {
+  cursor: pointer; }
+  .tab-content-row:hover {
+    box-shadow: 0 0 5px 0px #000; }
+
+.tab-cell-songurl {
+  text-align: center; }
 
 /*# sourceMappingURL=netease_music.css.map */

@@ -3,16 +3,15 @@
 .music_list_title{
   text-align: center;
 }
-
 .tab-content{
   text-align: center;
-  .tab-content-row{
-    cursor: pointer;
-    &:hover{
-      box-shadow: 0 0 5px 0px #000;
-    }
-    .tab-cell-songurl{
-      text-align: center;
-    }
+}
+.tab-content-row{
+  cursor: pointer;
+  &:hover{
+    box-shadow: 0 0 5px 0px #000;
   }
+}
+.tab-cell-songurl{
+  text-align: center;
 }
