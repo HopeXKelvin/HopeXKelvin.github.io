@@ -32,9 +32,6 @@ $(function(){
     };
   }
 
-  window.requestNormal = requestNormal;
-  window.requestJSONP = requestJSONP;
-
   // 用需要的有用信息去填充dom结构，第一步先展示简单的歌曲信息
   function genMusicTable(data){
     var musicListApp = new Vue({
