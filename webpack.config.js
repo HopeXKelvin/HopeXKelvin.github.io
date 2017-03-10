@@ -7,7 +7,7 @@ module.exports = {
     filename : 'bundle.js'
   },
   module : {
-    loader : [
+    loaders : [
       {test : /\.css$/,loader : 'style-loader!css-loader'}
     ]
   }
