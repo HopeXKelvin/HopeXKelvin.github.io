@@ -1,0 +1,22 @@
+{
+  "name": "hopexkelvin",
+  "version": "1.0.0",
+  "description": "## 简要说一下各个文件夹的分布及其意义:   - fe_doc文件夹下，主要存放各种个人学习FE的笔记，利用非常方便的MD格式去边写，直接推送到github.io上去，相当于个人的一个记事本，关于前端学习的。",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HopeXKelvin/HopeXKelvin.github.io.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HopeXKelvin/HopeXKelvin.github.io/issues"
+  },
+  "homepage": "https://github.com/HopeXKelvin/HopeXKelvin.github.io#readme",
+  "devDependencies": {
+    "webpack": "^2.2.1"
+  }
+}
