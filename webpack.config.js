@@ -12,6 +12,6 @@ module.exports = {
     ]
   },
   plugins : [
-    new webpack.BannerPlugin('This file is create by kelvin!');
+    new webpack.BannerPlugin('This file is create by kelvin!')
   ]
 };
