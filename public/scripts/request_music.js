@@ -22,7 +22,8 @@ $(function(){
 
     window.handleJSONP = function(data){
       // console.log(data);
-      var realData = processData(data);
+      var jsonData = JSON.parse(data);
+      var realData = processData(jsonData);
       genMusicTable(realData)
     };
 
