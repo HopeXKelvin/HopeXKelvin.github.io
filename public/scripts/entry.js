@@ -1,3 +1,8 @@
-require("./../styles/css/reset.css")// 载入 reset.css
+// javascript
+let People = require('./module.js');
+let p = new People("Kelvin");
+p.sayHi();
 document.write("It works.");
-document.write(require('./module.js'));// 添加新的模块
+
+// css
+require("./../styles/sass/index.scss")
