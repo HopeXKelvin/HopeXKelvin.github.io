@@ -17,8 +17,14 @@
   },
   "homepage": "https://github.com/HopeXKelvin/HopeXKelvin.github.io#readme",
   "devDependencies": {
-    "css-loader" : "^0.21.0",
-    "style-loader" : "^0.13.0",
+    "babel-cli": "^6.24.0",
+    "babel-loader": "^6.4.0",
+    "css-loader": "^0.21.0",
+    "file-loader": "^0.10.1",
+    "node-sass": "^4.5.0",
+    "sass-loader": "^6.0.3",
+    "style-loader": "^0.13.2",
+    "url-loader": "^0.5.8",
     "webpack": "^2.2.1"
   }
 }
