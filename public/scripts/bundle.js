@@ -107,7 +107,7 @@ class People{
   }
 }
 
-exports.module = People;
+module.exports = People;
 
 
 /***/ }),
@@ -119,7 +119,7 @@ exports = module.exports = __webpack_require__(3)();
 
 
 // module
-exports.push([module.i, "html, body, ul, ol {\n  margin: 0;\n  padding: 0;\n  box-sizing: content-box; }\n", ""]);
+exports.push([module.i, "html, body, ul, ol {\n  margin: 0;\n  padding: 0;\n  box-sizing: content-box; }\n\n.nine-block-layout {\n  display: flex; }\n\n.nine-block-item {\n  width: 100px;\n  height: 100px;\n  border: 1px solid #ddd; }\n", ""]);
 
 // exports
 
@@ -440,7 +440,7 @@ function updateLink(linkElement, obj) {
 let People = __webpack_require__(1);
 let p = new People("Kelvin");
 p.sayHi();
-document.write("It works.");
+// document.write("It works.");
 
 // css
 __webpack_require__(0)
