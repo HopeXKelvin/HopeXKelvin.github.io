@@ -1,8 +1,4 @@
 // javascript
-import bar from './bar';
-
-bar();
-
 let People = require('./module.js');
 // let p = new People("Kelvin");
 console.log(People);

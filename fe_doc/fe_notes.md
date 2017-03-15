@@ -199,4 +199,20 @@ JS中赋值运算符是右关联的，所以可以这么写：
 
 ### column-count和column-gap属性  
 
-![](http://p1.bqimg.com/567571/083163c954f0aa4b.png)
+![](http://p1.bqimg.com/567571/083163c954f0aa4b.png)  
+
+### 深浅拷贝一个对象  
+> 浅拷贝一个对象，只拷贝一个对象的顶层的非object对象  
+> 深拷贝一个对象，会一层一层拷贝直到最底层  
+> jquery提供一个 extend方法可以实现浅拷贝和深拷贝:  
+> 1.浅拷贝:  
+
+```javascript
+  var newObj = jQuery.extend({},oldObj);
+```  
+
+> 2.深拷贝:  
+
+```javascript
+  var newObj = jQuery.extend(true,{},oldObj);
+```  

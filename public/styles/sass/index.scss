@@ -2,6 +2,9 @@
 
 .nine-block-layout{
   display: flex;
+  flex-wrap: wrap;
+  width: 400px;
+  margin: 0 auto;
 }
 .nine-block-item{
   width: 100px;
