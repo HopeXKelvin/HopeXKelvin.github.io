@@ -438,8 +438,9 @@ function updateLink(linkElement, obj) {
 
 // javascript
 let People = __webpack_require__(1);
-let p = new People("Kelvin");
-p.sayHi();
+// let p = new People("Kelvin");
+console.log(People);
+// p.sayHi();
 // document.write("It works.");
 
 // css
