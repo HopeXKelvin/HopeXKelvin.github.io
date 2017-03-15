@@ -1,1 +1,10 @@
-@import "reset"
+@import "reset";
+
+.nine-block-layout{
+  display: flex;
+}
+.nine-block-item{
+  width: 100px;
+  height: 100px;
+  border: 1px solid #ddd;
+}

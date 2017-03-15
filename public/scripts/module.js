@@ -8,4 +8,4 @@ class People{
   }
 }
 
-exports.module = People;
+module.exports = People;
