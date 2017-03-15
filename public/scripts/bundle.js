@@ -95,19 +95,13 @@ if(false) {
 
 /***/ }),
 /* 1 */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
 // use ES6
-class People{
-  constructor(name){
-    this.name = name;
-  }
-  sayHi(){
-    console.log(`hi ${this.name} !`);
-  }
-}
-
-exports.module = People;
+/* harmony default export */ __webpack_exports__["a"] = function(){
+  console.log("This is from bar.js");
+};;
 
 
 /***/ }),
@@ -119,7 +113,7 @@ exports = module.exports = __webpack_require__(3)();
 
 
 // module
-exports.push([module.i, "html, body, ul, ol {\n  margin: 0;\n  padding: 0;\n  box-sizing: content-box; }\n\n.nine-block-layout {\n  display: flex; }\n\n.nine-block-item {\n  width: 100px;\n  height: 100px;\n  border: 1px solid #ddd; }\n", ""]);
+exports.push([module.i, "html, body, ul, ol {\n  margin: 0;\n  padding: 0;\n  box-sizing: content-box; }\n\n.nine-block-layout {\n  display: flex;\n  flex-wrap: wrap;\n  width: 400px;\n  margin: 0 auto; }\n\n.nine-block-item {\n  width: 100px;\n  height: 100px;\n  border: 1px solid #ddd; }\n", ""]);
 
 // exports
 
@@ -434,14 +428,15 @@ function updateLink(linkElement, obj) {
 
 /***/ }),
 /* 5 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__module__ = __webpack_require__(1);
 // javascript
-let People = __webpack_require__(1);
-// let p = new People("Kelvin");
-console.log(People);
-// p.sayHi();
-// document.write("It works.");
+
+
+__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__module__["a" /* default */])();
 
 // css
 __webpack_require__(0)
