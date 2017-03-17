@@ -216,3 +216,34 @@ JS中赋值运算符是右关联的，所以可以这么写：
 ```javascript
   var newObj = jQuery.extend(true,{},oldObj);
 ```  
+
+
+### 闭包常见用法:  
+Modules,模块化。模块化能够让我们定义私有的实现细节(包括变量和方法)，使他们可以不受外部环境的污染，当然同时还能对外提供API接口。  
+
+代码示例：  
+
+```javascript
+  function User(){
+    var username,password;// 闭包
+
+    function doLogin(user,pw){
+      username = user;
+      password = pw;
+      // 执行剩余的登录操作
+    }
+
+    var publicAPI = {
+      login : doLogin
+    };
+
+    // 放回公共的API
+    return publicAPI;
+  }
+
+  // 创建一个 'User' 模块的实例
+  var fred = User();
+  fred.login("fred","12kelvin34");
+```  
+
+以上为什么不是用 new User()而是直接用 User()，原因在于这里的User并不是作为一个类的存在，而仅仅只是一个方法而已，所以在此是直接调用这个方法，而不是用new去实例化一个对象。用new不适合，也会浪费资源
