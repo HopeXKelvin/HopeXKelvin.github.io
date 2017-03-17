@@ -8,7 +8,31 @@
     <link rel="stylesheet" href="styles/css/netease_music.css">
   </head>
   <body>
-    <h1>NetEaseCloudMusic歌单显示-通过API请求数据显示</h1>
+    <!-- 整体结构 -->
+    <div class="wrapper">
+      <div class="container">
+        <!-- 左边的导航栏 -->
+        <nav class="nav-left">
+          <div class="logo">Logo</div>
+          <ul class="nav-list">
+            <li class="nav-list-item">首页</li>
+            <li class="nav-list-item">网易云-歌单</li>
+          </ul>
+        </nav>
+        <!-- 右边的主体内容部分 -->
+        <div class="main-content">
+          <!-- 搜索框 -->
+          <div class="search-box">
+            <input type="text" class="search-ipt">
+            <button class="search-btn">搜索</button>
+          </div>
+          <!-- 搜索结果部分 -->
+          <div class="search-result"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- <h1>NetEaseCloudMusic歌单显示-通过API请求数据显示</h1>
     <input type="text" name="musiclist_id" id="musicId">
     <button id="get_resource">Click to get resource</button>
     <p id="resource_holder"></p>
@@ -28,7 +52,7 @@
           <td class="tab-cell-songurl">{{ item.songUrl }}</td>
         </tr>
       </table>
-    </div>
+    </div> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
     <script src="https://unpkg.com/vue/dist/vue.js"></script>
     <script src="scripts/request_music.js"></script>
