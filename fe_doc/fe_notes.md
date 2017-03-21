@@ -246,4 +246,31 @@ Modules,模块化。模块化能够让我们定义私有的实现细节(包括�
   fred.login("fred","12kelvin34");
 ```  
 
-以上为什么不是用 new User()而是直接用 User()，原因在于这里的User并不是作为一个类的存在，而仅仅只是一个方法而已，所以在此是直接调用这个方法，而不是用new去实例化一个对象。用new不适合，也会浪费资源
+以上为什么不是用 new User()而是直接用 User()，原因在于这里的User并不是作为一个类的存在，而仅仅只是一个方法而已，所以在此是直接调用这个方法，而不是用new去实例化一个对象。用new不适合，也会浪费资源  
+
+### 记录一个题目：  
+写一个traverse函数,输出所有页面中宽度和高度大于50像素的节点:  
+
+```javascript
+  function traverse(node){
+    // 利用到了递归遍历子节点
+    var result = [];
+    node = node || document.body;
+    if(node.style){
+      var width = parseInt(node.style.width) || 0;
+      var height = parseInt(node.style.height) || 0;
+      if(width>50 && height>50){
+        result.push(node);
+      }
+    }
+    var childNodes = node.childNodes;
+    if(childNodes.length>0){
+      for(var i=0;i<childNodes.length;i++){
+        var tempNode = childNodes[i];
+        result = result.concat(traverse(tempNode));
+      }
+    }
+    return result;
+  }
+
+```
