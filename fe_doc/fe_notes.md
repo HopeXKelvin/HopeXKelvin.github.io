@@ -274,3 +274,49 @@ Modules,模块化。模块化能够让我们定义私有的实现细节(包括�
   }
 
 ```
+
+### 关于二叉树的前序遍历和中序遍历的JAVA实现:  
+
+```java
+  /**
+   * Definition for a binary tree node.
+   * public class TreeNode {
+   *     int val;
+   *     TreeNode left;
+   *     TreeNode right;
+   *     TreeNode(int x) { val = x; }
+   * }
+   */
+   public class Solution{
+     //  前序遍历
+     public List<Integer> preorderTraversal(TreeNode root){
+       List<Integer> list = new ArrayList<>();
+       Stack<ListNode> stack = new Stack<>();
+       while(root != null || !stack.empty()){
+         while(root != null){
+           list.add(root.val);
+           stack.push(root);
+           root = root.left;
+         }
+         root = stack.pop();
+         root = root.right;
+       }
+       return list;
+     }
+
+    //  中序遍历
+    public List<Integer> inorderTraversal(TreeNode root){
+      List<Integer> list = new ArrayList<>();
+      Stack<ListNode> stack = new Stack<>();
+      while(root != null || !stack.empty()){
+        while(root != null){
+          stack.push(root);
+          root = root.left;
+        }
+        root = stack.pop();
+        list.add(root.val);
+        root = root.right;
+      }
+    }
+   }
+```
