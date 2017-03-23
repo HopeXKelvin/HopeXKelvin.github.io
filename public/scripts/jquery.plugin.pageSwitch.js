@@ -37,6 +37,7 @@
         // 绑定鼠标滚动事件
         var $body = $(document.body);
         $body.on('mousewheel',function(event){
+          event.preventDefault();
           // 窗口滚动事件
           var mousewheelEvent = event.originalEvent;
           var delta = mousewheelEvent.wheelDelta;
@@ -66,13 +67,16 @@
         return false;
       },
       scrollPage : function(toward){
+        var _this = this;
         if(toward === "next"){
           // 向下一个滚动
           var oldActiveEle = $("div[data-active]");
           var nextEle = oldActiveEle.next();
           if(nextEle.length > 0){
             var topOffset = nextEle[0].offsetTop;
-            scroll(topOffset,200);
+            setTimeout(function(){
+              _this.scrollFullPage(topOffset,100);
+            },200);
             oldActiveEle.attr("data-active",false);
             oldActiveEle.removeClass("active");
             nextEle.attr("data-active",true);
@@ -84,7 +88,9 @@
           var prevEle = oldActiveEle.prev();
           if(prevEle.length > 0){
             var topOffset = prevEle[0].offsetTop;
-            scroll(topOffset,200);
+            setTimeout(function(){
+              _this.scrollFullPage(topOffset,100);
+            },200);
             oldActiveEle.attr("data-active",false);
             oldActiveEle.removeClass("active");
             prevEle.attr("data-active",true);
@@ -92,14 +98,16 @@
           }
         }
       },
-      scroll : function(yPos,speed){
+      scrollFullPage : function(yPos,speed){
         var $body = $("html,body");
         // var speed = 200;
         // 检测不同的浏览器
         var scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
-        $body.stop().animate({
+        $body.animate({
           scrollTop : yPos
-        },speed);
+        },speed,function(){
+          console.log("动画完成!");
+        });
       }
     };
     // 返回对象
