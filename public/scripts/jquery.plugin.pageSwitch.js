@@ -70,7 +70,7 @@
         var _this = this;
         if(toward === "next"){
           // 向下一个滚动
-          var oldActiveEle = $("div[data-active]");
+          var oldActiveEle = $('div[data-active="true"]');
           var nextEle = oldActiveEle.next();
           if(nextEle.length > 0){
             var topOffset = nextEle[0].offsetTop;
@@ -84,7 +84,7 @@
           }
         }else{
           // 向上一个滚动
-          var oldActiveEle = $("div[data-active]");
+          var oldActiveEle = $('div[data-active="true"]');
           var prevEle = oldActiveEle.prev();
           if(prevEle.length > 0){
             var topOffset = prevEle[0].offsetTop;
