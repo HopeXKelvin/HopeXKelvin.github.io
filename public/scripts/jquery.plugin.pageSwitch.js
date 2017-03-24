@@ -75,8 +75,8 @@
           if(nextEle.length > 0){
             var topOffset = nextEle[0].offsetTop;
             setTimeout(function(){
-              _this.scrollFullPage(topOffset,100);
-            },200);
+              _this.scrollFullPage(-topOffset,200);
+            },150);
             oldActiveEle.attr("data-active",false);
             oldActiveEle.removeClass("active");
             nextEle.attr("data-active",true);
@@ -89,8 +89,8 @@
           if(prevEle.length > 0){
             var topOffset = prevEle[0].offsetTop;
             setTimeout(function(){
-              _this.scrollFullPage(topOffset,100);
-            },200);
+              _this.scrollFullPage(-topOffset,200);
+            },150);
             oldActiveEle.attr("data-active",false);
             oldActiveEle.removeClass("active");
             prevEle.attr("data-active",true);
@@ -99,12 +99,13 @@
         }
       },
       scrollFullPage : function(yPos,speed){
-        var $body = $("html,body");
+        // var $body = $("html,body");
+        var $this = $(this.element);
         // var speed = 200;
         // 检测不同的浏览器
         var scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
-        $body.animate({
-          scrollTop : yPos
+        $this.animate({
+          top : yPos
         },speed,function(){
           console.log("动画完成!");
         });
