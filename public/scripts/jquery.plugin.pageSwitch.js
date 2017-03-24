@@ -29,6 +29,24 @@
         fullpageDomList[0].setAttribute("data-active",true);
         fullpageDomList[0].className = fullpageDomList[0].className + " active";
         // 存一些参数的和dom结构
+
+        // 建立ul导航点
+        this.renderNavList(4);
+      },
+      renderNavList : function(listNum){
+        var navListDom = document.createElement("ul");
+        $(navListDom).addClass("nav-list");
+        for(var i=0;i<listNum;i++){
+          var item = document.createElement("li");
+          $(item).addClass("nav-list-item");
+          $(item).attr("data-index",i);
+          navListDom.appendChild(item);
+        }
+        // 给第一个li加上active 状态
+        $(navListDom.children[0]).addClass("active");
+        $(navListDom.children[0]).attr("data-active",true);
+        // 拼接到 this.element 上去
+        this.element.append(navListDom);
       },
       bindEvent : function(){
         var _this = this;
@@ -48,6 +66,34 @@
             console.log("向下滚动");
             _this.scrollPage("next");
           }
+        });
+
+        // 绑定每一个navlist 下面的 item 的事件
+        $(".nav-list").delegate("li","click",function(event){
+          console.log(event);
+          var target = event.currentTarget;
+          var dataIndex = target.getAttribute("data-index");
+          var oldActiveEle = $('div[data-active="true"]');
+          var oldActiveLi = $('li[data-active="true"]');
+
+          var $pageList = _this.element.find("div.full-page");
+          var newActivePage = $pageList[parseInt(dataIndex)];
+
+          // 获取需要激活的 page的 offsetTop 的值
+          var offsetTop = newActivePage.offsetTop;
+          setTimeout(function(){
+            _this.scrollFullPage(-offsetTop,200);
+            // 更改 全屏部分的显示 状态
+            oldActiveEle.attr("data-active",false);
+            oldActiveEle.removeClass("active");
+            $(newActivePage).attr("data-active",true);
+            $(newActivePage).addClass("active");
+            // 更改 navlist 的显示状态
+            oldActiveLi.attr("data-active",false);
+            oldActiveLi.removeClass("active");
+            $(target).attr("data-active",true);
+            $(target).addClass("active");
+          },150);
         });
       },
       onTop : function(){
@@ -71,30 +117,46 @@
         if(toward === "next"){
           // 向下一个滚动
           var oldActiveEle = $('div[data-active="true"]');
+          var oldActiveLi = $('li[data-active="true"]');
           var nextEle = oldActiveEle.next();
-          if(nextEle.length > 0){
+          var nextLi = oldActiveLi.next();
+          if(nextEle.length > 0 && nextLi.length >0){
             var topOffset = nextEle[0].offsetTop;
             setTimeout(function(){
               _this.scrollFullPage(-topOffset,200);
+              // 更改 全屏部分的显示 状态
+              oldActiveEle.attr("data-active",false);
+              oldActiveEle.removeClass("active");
+              nextEle.attr("data-active",true);
+              nextEle.addClass("active");
+              // 更改 navlist 的显示状态
+              oldActiveLi.attr("data-active",false);
+              oldActiveLi.removeClass("active");
+              nextLi.attr("data-active",true);
+              nextLi.addClass("active");
             },150);
-            oldActiveEle.attr("data-active",false);
-            oldActiveEle.removeClass("active");
-            nextEle.attr("data-active",true);
-            nextEle.addClass("active");
           }
         }else{
           // 向上一个滚动
           var oldActiveEle = $('div[data-active="true"]');
+          var oldActiveLi = $('li[data-active="true"]');
           var prevEle = oldActiveEle.prev();
-          if(prevEle.length > 0){
+          var prevLi = oldActiveLi.prev();
+          if(prevEle.length > 0 && prevLi.length >0){
             var topOffset = prevEle[0].offsetTop;
             setTimeout(function(){
               _this.scrollFullPage(-topOffset,200);
+              // 更改 全屏部分的显示 状态
+              oldActiveEle.attr("data-active",false);
+              oldActiveEle.removeClass("active");
+              prevEle.attr("data-active",true);
+              prevEle.addClass("active");
+              // 更改 navlist 的显示状态
+              oldActiveLi.attr("data-active",false);
+              oldActiveLi.removeClass("active");
+              prevLi.attr("data-active",true);
+              prevLi.addClass("active");
             },150);
-            oldActiveEle.attr("data-active",false);
-            oldActiveEle.removeClass("active");
-            prevEle.attr("data-active",true);
-            prevEle.addClass("active");
           }
         }
       },

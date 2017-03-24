@@ -18,6 +18,32 @@ html,body{
   top: 0;
 }
 
+.nav-list{
+  top: 50%;
+  right: 0%;
+  position: fixed;
+  transform: translate(-50%, -50%);
+  list-style: none;
+}
+.nav-list-item{
+  width: 2px;
+  height: 2px;
+  border: 2px solid #999;
+  border-radius: 100%;
+  padding: 4px;
+  margin: 10px 0;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.nav-list-item:hover{
+  background-color: #aaa;
+}
+
+.nav-list-item.active{
+  background-color: #ddd;
+}
+
 .container,.full-page-container,.full-page-container>div{
   width: 100%;
   height: 100%;
