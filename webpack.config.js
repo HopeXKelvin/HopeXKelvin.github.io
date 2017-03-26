@@ -31,6 +31,9 @@ module.exports = {
         }],
         fallback : "style-loader"
       })
+    },{
+      test : /\.(jpg|png)$/,
+      loader : 'url?limit=50000'
     }]
   },
   plugins : [
