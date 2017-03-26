@@ -1,5 +1,10 @@
 var webpack = require('webpack');
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
+
+const extractSass = new ExtractTextPlugin({
+  filename : "[name].[contenthash].css",
+  disable : process.env.NODE_DEV === "development"
+});
 
 module.exports = {
   entry : './public/scripts/entry.js',
@@ -8,22 +13,28 @@ module.exports = {
     filename : './public/scripts/bundle.js'
   },
   module : {
-    rules : [
-      {
-        test : /\.css$/,
-        use : ExtractTextPlugin.extract({
-          use : 'css-loader'
-        })
-      }
-    ],
-    loaders : [
-      {test : /\.css$/,loader : 'style-loader!css-loader'},
-      {test : /\.scss$/,loader:"style-loader!css-loader!sass-loader"},
-      {test : /\.(jpg|png|gif)$/,}
-    ]
+    rules : [{
+      test : /\.css$/,
+      use : ExtractTextPlugin.extract({
+        use : 'css-loader'
+      })
+    },
+    {
+      test : /\.scss$/,
+      use : extractSass.extract({
+        use : [{
+          loader : "style-loader"
+        },{
+          loader : "css-loader" // 将 css 转换成 CommonJS
+        },{
+          loader : "sass-loader" // 将 sass文件 编译成 css
+        }],
+        fallback : "style-loader"
+      })
+    }]
   },
   plugins : [
     new webpack.BannerPlugin('This file is create by kelvin!'),
-    new ExtractTextPlugin('styles.css')
+    extractSass
   ]
 };
