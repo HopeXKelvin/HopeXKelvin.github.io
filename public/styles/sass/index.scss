@@ -1,13 +1,40 @@
 @import "reset";
 
+.container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
 .nine-block-layout{
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
   width: 400px;
+  height: 400px;
   margin: 0 auto;
 }
 .nine-block-item{
   width: 100px;
   height: 100px;
+  box-sizing: border-box;
   border: 1px solid #ddd;
+  margin: 0 5px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &:hover{
+    box-shadow: 0 0 10px 0 #ddd;
+  }
+  &:hover>a{
+    color: #666;
+  }
+}
+.nine-block-item>a{
+  text-decoration: none;
+  color: #999;
 }
