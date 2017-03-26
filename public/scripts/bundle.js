@@ -64,7 +64,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 5);
+/******/ 	return __webpack_require__(__webpack_require__.s = 4);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -74,10 +74,10 @@
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(2);
+var content = __webpack_require__(1);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
-var update = __webpack_require__(4)(content, {});
+var update = __webpack_require__(3)(content, {});
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -95,31 +95,20 @@ if(false) {
 
 /***/ }),
 /* 1 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-// use ES6
-/* harmony default export */ __webpack_exports__["a"] = function(){
-  console.log("This is from bar.js");
-};;
-
-
-/***/ }),
-/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(3)();
+exports = module.exports = __webpack_require__(2)();
 // imports
 
 
 // module
-exports.push([module.i, "html, body, ul, ol {\n  margin: 0;\n  padding: 0;\n  box-sizing: content-box; }\n\n.nine-block-layout {\n  display: flex;\n  flex-wrap: wrap;\n  width: 400px;\n  margin: 0 auto; }\n\n.nine-block-item {\n  width: 100px;\n  height: 100px;\n  border: 1px solid #ddd; }\n", ""]);
+exports.push([module.i, "html, body, ul, ol {\n  margin: 0;\n  padding: 0;\n  box-sizing: content-box; }\n\n.container {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  height: 100%;\n  width: 100%; }\n\n.nine-block-layout {\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: center;\n  align-items: center;\n  width: 400px;\n  height: 400px;\n  margin: 0 auto; }\n\n.nine-block-item {\n  width: 100px;\n  height: 100px;\n  box-sizing: border-box;\n  border: 1px solid #ddd;\n  margin: 0 5px;\n  cursor: pointer;\n  display: flex;\n  justify-content: center;\n  align-items: center; }\n  .nine-block-item:hover {\n    box-shadow: 0 0 10px 0 #ddd; }\n  .nine-block-item:hover > a {\n    color: #666; }\n\n.nine-block-item > a {\n  text-decoration: none;\n  color: #999; }\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 3 */
+/* 2 */
 /***/ (function(module, exports) {
 
 /*
@@ -175,7 +164,7 @@ module.exports = function() {
 
 
 /***/ }),
-/* 4 */
+/* 3 */
 /***/ (function(module, exports) {
 
 /*
@@ -427,19 +416,16 @@ function updateLink(linkElement, obj) {
 
 
 /***/ }),
-/* 5 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__module__ = __webpack_require__(1);
 // javascript
-
-
-__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__module__["a" /* default */])();
+// import bar from './module';
+// import vue from vue;
+// bar();
 
 // css
-__webpack_require__(0)
+__webpack_require__(0);
 
 
 /***/ })
