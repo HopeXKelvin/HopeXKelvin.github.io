@@ -40,8 +40,8 @@ window.onload = function(){
     canvas.className = "line-canvas";
     document.body.appendChild(canvas)
     lineCanvas = canvas.getContext("2d");
-    // lineCanvas.moveTo(0,0)
-    // lineCanvas.lineTo(489,346)
+    // lineCanvas.moveTo(157,100)
+    // lineCanvas.lineTo(399,256)
     // lineCanvas.stroke()
   }
 
@@ -61,7 +61,7 @@ window.onload = function(){
       var clientY = parseInt(event.changedTouches[0].clientY);
       // helpDom.innerHTML += "<br>ClientX : " + clientX + ",ClientY : " + clientY;
       tapPoint(clientX,clientY);
-      // console.log(event);
+      console.log(event);
     });
     lockBox.addEventListener("touchend",function(event){
       console.log("touch end");
@@ -98,8 +98,8 @@ window.onload = function(){
             var prevIndex = pwdGestureOrder[pwdGestureOrder.length-1];
             var prevPos = posMap[prevIndex].pos;
             var nextPos = posMap[index].pos;
-            lineCanvas.moveTo(prevPos[0],prevPos[1]);
-            lineCanvas.lineTo(nextPos[0],nextPos[1]);
+            lineCanvas.moveTo(prevPos[0]/2,prevPos[1]/10);
+            lineCanvas.lineTo(nextPos[0]/2,nextPos[1]/10);
             lineCanvas.stroke();
           }
           pwdGestureOrder.push(index);// 把这个点 push 到数组里面
