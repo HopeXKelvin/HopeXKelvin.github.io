@@ -1,0 +1,57 @@
+html,body{
+  height: 100%;
+  width: 100%;
+  font-size: 60px;
+}
+
+html,body,h1,h2,h3,h4,h5,h6,p,ul,ol,table{
+  margin:0;
+  padding:0;
+}
+
+.lock-container{
+  height: 100%;
+}
+
+.lock-container>h2{
+  font-family: "Microsoft Yahei";
+  font-size: 1rem;
+  text-align: center;
+}
+
+.lock-box{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  height: 70%;
+  width: 80%;
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding: 20% 0px;
+}
+
+.row{
+  display: flex;
+
+}
+.lock-item{
+  border-radius: 100%;
+  border: 1px solid #000;
+  width: 3rem;
+  height: 3rem;
+  margin: 0rem 0.5rem;
+}
+
+.switch-btn-group>button{
+  font-family: "Microsoft Yahei";
+  font-size: 0.8rem;
+  font-family: "Microsoft Yahei";
+  display: block;
+  margin: 50px auto;
+  padding: 20px 0;
+  width: 80%;
+  border: none;
+  background-color: #0B71A5;
+  color: #fff;
+}
