@@ -43,6 +43,10 @@ html,body,h1,h2,h3,h4,h5,h6,p,ul,ol,table{
   margin: 0rem 0.5rem;
 }
 
+.lock-item.selected{
+  background-color: #E06C75;
+}
+
 .switch-btn-group>button{
   font-family: "Microsoft Yahei";
   font-size: 0.8rem;
