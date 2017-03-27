@@ -28,13 +28,9 @@ html,body,h1,h2,h3,h4,h5,h6,p,ul,ol,table{
   width: 80%;
   margin: 0 auto;
   box-sizing: border-box;
-  padding: 20% 0px;
+  padding: 10% 0px;
 }
 
-.row{
-  display: flex;
-
-}
 .lock-item{
   border-radius: 100%;
   border: 1px solid #000;
@@ -69,4 +65,13 @@ html,body,h1,h2,h3,h4,h5,h6,p,ul,ol,table{
   color: #fff;
   font-size: 0.5rem;
   padding: 5px;
+}
+
+.line-canvas{
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: -99;
 }
