@@ -55,3 +55,14 @@ html,body,h1,h2,h3,h4,h5,h6,p,ul,ol,table{
   background-color: #0B71A5;
   color: #fff;
 }
+
+.help-display{
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(0,0,0,0.8);
+  color: #fff;
+  font-size: 0.5rem;
+  padding: 5px;
+}
