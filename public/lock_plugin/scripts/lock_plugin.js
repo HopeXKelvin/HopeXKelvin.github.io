@@ -38,8 +38,13 @@ window.onload = function(){
     // 渲染画布，画布的作用是画线，生成手势之间的连线
     var canvas = document.createElement("canvas");
     canvas.className = "line-canvas";
-    document.body.appendChild(canvas)
+    document.body.appendChild(canvas);
     lineCanvas = canvas.getContext("2d");
+    // 设置 canvas 的宽高
+    var screenWidth = window.screen.width;
+    var screenHeight = window.screen.height;
+    canvas.style.width = screenWidth;
+    canvas.style.height = screenHeight;
     // lineCanvas.moveTo(157,100)
     // lineCanvas.lineTo(399,256)
     // lineCanvas.stroke()
