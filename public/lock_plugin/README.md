@@ -1,4 +1,5 @@
 # 手势解锁说明文档  
+> demo地址：https://hopexkelvin.github.io/public/lock_plugin/index  
 
 ## 总体设计思路：  
 首先布局方面，页面顶部是header，中间部分利用flex布局实现九宫格布局(9个手势点)，底部放置了两个按钮。实现的思路是，初始化页面的时候，存放好9个点的坐标信息，数据结构如下所示:  
