@@ -3,6 +3,9 @@ window.onload = function(){
   var posMap = {};// 存放9个点的x,y轴坐标范围信息,用于后面滑动屏幕解锁的时候做检测
   var pwdGestureOrder = [];// 存放收拾密码的序列
   var lineCanvas = null;
+  var mode = 1;// 表示当前处于什么模式下,1表示正在设置密码手势，0表示进入验证的状态,刚开始的默认值是1 表示设置密码
+  var localStorage = window.localStorage;
+  var setPwdList = [];
 
   function init(){
     // 初始化方法
@@ -83,10 +86,99 @@ window.onload = function(){
         var screenHeight = window.innerHeight;
         lineCanvas.clearRect(0,0,screenWidth,screenHeight);
         lineCanvas.beginPath();
+
+        // 检测当前密码序列是否小于4个点
+        if(pwdGestureOrder.length<5){
+          // 不符合要求，给出提示
+          // 根据 mode 的不同，显示不同的提示
+          var msg = {};
+          if(mode === 0){
+            // 验证模式
+            msg.tipsContent = "密码验证失败";
+          }else{
+            msg.tipsContent = "密码手势设置不能少于5个点";
+          }
+          popTips(msg);
+        }else{
+          // 符号手势点数的要求，根据mode 的状态是设置密码还是验证密码
+          switch (mode) {
+            case 0:
+              // 验证模式下，做密码的比较
+              var realPwdStr = localStorage.getItem("password");
+              // var realPwdStr = realPwd.join("");
+              var inputPwdStr = pwdGestureOrder.join("");
+              if(realPwdStr === inputPwdStr){
+                // 密码验证成功
+                popTips({tipsContent:"密码验证成功!"});
+              }else{
+                // 密码验证失败
+                popTips({tipsContent:"密码验证失败"});
+              }
+              break;
+            case 1:
+              // 设置模式
+              if(setPwdList.length<=0){
+                // 当前第一次设置
+                setPwdList.push(pwdGestureOrder);
+              }else{
+                // 第二次设置,比较前后两次是否一致
+                var secondPwdStr = pwdGestureOrder.join("");
+                var firstPwdStr = setPwdList.pop().join("");
+                if(firstPwdStr === secondPwdStr){
+                  // 两次设置一致
+                  // 更新localStorage
+                  localStorage.setItem("password",secondPwdStr);
+                  setPwdList = [];//同样要清空
+                  popTips({tipsContent:"密码设置成功"});
+                }else{
+                  // 两次设置密码不一致，重置设置密码
+                  setPwdList = [];// 清空
+                  popTips({tipsContent:"两次密码设置不一致，请重新设置"});
+                }
+              }
+              break;
+            default:
+              break;
+          }
+        }
         // 还需要清空 pwdGestureOrder 序列的数
         pwdGestureOrder = [];
       },300);
       console.log(event);
+    });
+
+    // 设置按钮事件
+    var btnGroup = document.getElementsByClassName("switch-btn-group")[0];
+    btnGroup.addEventListener("click",function(event){
+      var target = event.target;
+      var targetId = event.target.id;
+      var activeBtn = document.getElementsByClassName("btn active")[0];
+      switch (targetId) {
+        case "setPwdBtn":
+          // 设置密码模式
+          if(target !== activeBtn){
+            activeBtn.className = activeBtn.className.replace("active","");
+            target.className = target.className + " active";
+          }
+          mode = 1;
+          break;
+        case "verifyPwdBtn":
+          // 检测当前是否已经设置好了密码手势
+          if(localStorage.length>0){
+            if(target !== activeBtn){
+              activeBtn.className = activeBtn.className.replace("active","");
+              target.className = target.className + " active";
+            }
+            mode = 0;
+          }else{
+            // 提示要先设置密码手势
+            var msg = {tipsContent: "必须先设置密码才能进行验证"};
+            popTips(msg);
+          }
+          break;
+        default:
+          break;
+      }
     });
   }
 
@@ -125,9 +217,21 @@ window.onload = function(){
     }
   }
 
-  // 画线的方法
-  function drawLine(from,to){
+  // 弹出提示的方法
+  function popTips(msg){
+    var tipsBox = document.getElementById("tipsBox");
+    var tipsTitle = document.getElementById("tipsTitle");
+    var tipsContent = document.getElementById("tipsContent");
+    var tips = document.getElementsByClassName("tips")[0];
 
+    tipsTitle.innerHTML = msg.tipsTitle || "tips";
+    tipsContent.innerHTML = msg.tipsContent;
+    tips.innerHTML = msg.tipsContent;
+    // tipsBox.style.display = "block";
+    setTimeout(function(){
+      // tipsBox.style.display = "none";
+      tips.innerHTML = "";// 清空提示
+    },1000);
   }
   // 调用方法
   init();

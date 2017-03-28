@@ -21,14 +21,20 @@
         <div class="lock-item" id="dot_9" data-index="9"></div>
     </div>
     <div class="switch-btn-group">
-      <button type="button" name="setpwd">设置密码</button>
-      <button type="button" name="verifypwd">验证密码</button>
+      <div class="tips"></div>
+      <button type="button" name="setpwd" id="setPwdBtn" class="btn active">设置密码</button>
+      <button type="button" name="verifypwd" id="verifyPwdBtn" class="btn">验证密码</button>
     </div>
   </div>
   <!-- 显示信息的-辅助调试的DIV -->
   <!-- <div class="help-display">
     显示辅助信息
   </div> -->
+  <!-- 提示框 -->
+  <div class="tips-box" id="tipsBox">
+    <div class="tips-title" id="tipsTitle">提示标题</div>
+    <div class="tips-content" id="tipsContent">提示内容</div>
+  </div>
   <script type="text/javascript" src="scripts/lock_plugin.js"></script>
 </body>
 </html>
