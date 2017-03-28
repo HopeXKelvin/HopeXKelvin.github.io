@@ -55,8 +55,6 @@ window.onload = function(){
   }
 
   function bindEvent(){
-    // 定义一些变量
-    var helpDom = document.getElementsByClassName("help-display")[0];
     // 绑定事件方法
     var lockBox = document.getElementById("lockBox");
     lockBox.addEventListener("touchstart",function(event){
@@ -65,12 +63,9 @@ window.onload = function(){
     });
     lockBox.addEventListener("touchmove",function(event){
       event.preventDefault();// 阻止页面滚动
-      // console.log("touch move");
       var clientX = parseInt(event.changedTouches[0].clientX);
       var clientY = parseInt(event.changedTouches[0].clientY);
-      // helpDom.innerHTML += "<br>ClientX : " + clientX + ",ClientY : " + clientY;
       tapPoint(clientX,clientY);
-      // console.log(event);
     });
     lockBox.addEventListener("touchend",function(event){
       console.log("touch end");
@@ -88,7 +83,6 @@ window.onload = function(){
         var screenHeight = window.innerHeight;
         lineCanvas.clearRect(0,0,screenWidth,screenHeight);
         lineCanvas.beginPath();
-
         // 检测当前密码序列是否小于4个点
         if(pwdGestureOrder.length<5){
           // 不符合要求，给出提示
@@ -220,22 +214,13 @@ window.onload = function(){
       }
     }
   }
-
   // 弹出提示的方法
   function popTips(msg){
-    var tipsBox = document.getElementById("tipsBox");
-    var tipsTitle = document.getElementById("tipsTitle");
-    var tipsContent = document.getElementById("tipsContent");
     var tips = document.getElementsByClassName("tips")[0];
-
-    tipsTitle.innerHTML = msg.tipsTitle || "tips";
-    tipsContent.innerHTML = msg.tipsContent;
     tips.innerHTML = msg.tipsContent;
-    // tipsBox.style.display = "block";
     setTimeout(function(){
-      // tipsBox.style.display = "none";
       tips.innerHTML = "";// 清空提示
-    },1000);
+    },800);
   }
   // 调用方法
   init();

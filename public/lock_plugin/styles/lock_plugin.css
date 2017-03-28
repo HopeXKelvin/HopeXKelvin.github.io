@@ -46,7 +46,6 @@ html,body,h1,h2,h3,h4,h5,h6,p,ul,ol,table{
 .switch-btn-group>button{
   font-family: "Microsoft Yahei";
   font-size: 0.8rem;
-  font-family: "Microsoft Yahei";
   display: block;
   margin: 50px auto;
   padding: 20px 0;
@@ -54,6 +53,7 @@ html,body,h1,h2,h3,h4,h5,h6,p,ul,ol,table{
   border: none;
   background-color: #eee;
   color: #fff;
+  border-radius: 10px;
 }
 
 .btn.active{
