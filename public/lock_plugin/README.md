@@ -37,10 +37,10 @@
 
   ## 实践过程中遇到的一些坑：  
 
-  1. 九宫格布局(flex)  
+  - 九宫格布局(flex)  
 
-  2. canvas的 width和heigh 设置需要注意，并不是设置 canvas.style.width 而是canvas.width.一开始用的前面的那种方式给canvas设置宽高，结果怎么画线坐标都对不上，后来才发现要直接设置canvas的width 和 height  
+  - canvas的 width和heigh 设置需要注意，并不是设置 canvas.style.width 而是canvas.width.一开始用的前面的那种方式给canvas设置宽高，结果怎么画线坐标都对不上，后来才发现要直接设置canvas的width 和 height  
 
-  3. localStorage是永久存在于浏览器当中的，所以每一次进入页面的时候都需要清空一下  
+  - localStorage是永久存在于浏览器当中的，所以每一次进入页面的时候都需要清空一下  
 
-  4. canvas画线，横竖方向的粗细程度不一致，后来把线条的宽度加大了，好多了
+  - canvas画线，横竖方向的粗细程度不一致，后来把线条的宽度加大了，好多了
