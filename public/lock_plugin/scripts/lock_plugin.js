@@ -1,21 +1,23 @@
+/*
+*作者：kelvin
+*时间：17-03-28
+*功能：移动端手势密码功能JS
+*/
 window.onload = function(){
   // 定义一些全局的变量
   var posMap = {};// 存放9个点的x,y轴坐标范围信息,用于后面滑动屏幕解锁的时候做检测
   var pwdGestureOrder = [];// 存放收拾密码的序列
-  var lineCanvas = null;
+  var lineCanvas = null;// 存放canvas画线的2d context
   var mode = 1;// 表示当前处于什么模式下,1表示正在设置密码手势，0表示进入验证的状态,刚开始的默认值是1 表示设置密码
-  var localStorage = window.localStorage;
-  // 每一次进入页面都要重新清空一下 localStorage
-  localStorage.clear();
-  var setPwdList = [];
-
+  var localStorage = window.localStorage;// 获取本地存储 localStorage
+  var setPwdList = [];// 设置密码的时候，用于存放设置的密码序列
+  localStorage.clear();// 每一次进入页面都要重新清空一下 localStorage
   function init(){
     // 初始化方法
     savePointInfo();
     renderCanvas();
     bindEvent();
   }
-
   function savePointInfo(){
     // 存放9个点的x,y轴坐标范围的信息的方法
     var points = document.getElementsByClassName("lock-item");
@@ -38,7 +40,6 @@ window.onload = function(){
     }
     console.log(posMap);
   }
-
   function renderCanvas(){
     // 渲染画布，画布的作用是画线，生成手势之间的连线
     var canvas = document.createElement("canvas");
@@ -53,7 +54,6 @@ window.onload = function(){
     lineCanvas.strokeStyle = "rgba(100,100,100,1)";
     lineCanvas.lineWidth = 6;
   }
-
   function bindEvent(){
     // 绑定事件方法
     var lockBox = document.getElementById("lockBox");
@@ -179,9 +179,8 @@ window.onload = function(){
       }
     });
   }
-
-  // 触发碰到点的效果
   function tapPoint(xpos,ypos){
+    // 触发碰到点的效果
     // 便利 posMap
     for(var index in posMap){
       if(posMap[index].hasTap === false){
@@ -214,8 +213,8 @@ window.onload = function(){
       }
     }
   }
-  // 弹出提示的方法
   function popTips(msg){
+    // 弹出提示的方法
     var tips = document.getElementsByClassName("tips")[0];
     tips.innerHTML = msg.tipsContent;
     setTimeout(function(){
