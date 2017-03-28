@@ -41,13 +41,12 @@ window.onload = function(){
     document.body.appendChild(canvas);
     lineCanvas = canvas.getContext("2d");
     // 设置 canvas 的宽高
-    var screenWidth = window.screen.width;
-    var screenHeight = window.screen.height;
-    canvas.style.width = screenWidth;
-    canvas.style.height = screenHeight;
-    // lineCanvas.moveTo(157,100)
-    // lineCanvas.lineTo(399,256)
-    // lineCanvas.stroke()
+    var screenWidth = window.innerWidth;
+    var screenHeight = window.innerHeight;
+    canvas.setAttribute("width",screenWidth);
+    canvas.setAttribute("height",screenHeight);
+    lineCanvas.strokeStyle = "rgba(100,100,100,1)";
+    lineCanvas.lineWidth = 6;
   }
 
   function bindEvent(){
@@ -66,7 +65,7 @@ window.onload = function(){
       var clientY = parseInt(event.changedTouches[0].clientY);
       // helpDom.innerHTML += "<br>ClientX : " + clientX + ",ClientY : " + clientY;
       tapPoint(clientX,clientY);
-      console.log(event);
+      // console.log(event);
     });
     lockBox.addEventListener("touchend",function(event){
       console.log("touch end");
@@ -79,6 +78,13 @@ window.onload = function(){
           // 还要修改以下posMap的数据结构
           posMap[index].hasTap = false;
         }
+        // 清空路径，为下一次重新绘制做准备
+        var screenWidth = window.innerWidth;
+        var screenHeight = window.innerHeight;
+        lineCanvas.clearRect(0,0,screenWidth,screenHeight);
+        lineCanvas.beginPath();
+        // 还需要清空 pwdGestureOrder 序列的数
+        pwdGestureOrder = [];
       },300);
       console.log(event);
     });
@@ -95,7 +101,7 @@ window.onload = function(){
         var yB = posMap[index].y[1];
         if((xpos>xL && xpos<xR) && (ypos>yT && ypos<yB)){
           // 检测该点在触碰的范围内
-          console.log("第 " + index + "个点被碰到了");
+          console.log("第 " + index + "点被碰到了");
           if(pwdGestureOrder.length <= 0){
             // 表示数组为空
           }else{
@@ -103,8 +109,8 @@ window.onload = function(){
             var prevIndex = pwdGestureOrder[pwdGestureOrder.length-1];
             var prevPos = posMap[prevIndex].pos;
             var nextPos = posMap[index].pos;
-            lineCanvas.moveTo(prevPos[0]/2,prevPos[1]/10);
-            lineCanvas.lineTo(nextPos[0]/2,nextPos[1]/10);
+            lineCanvas.moveTo(prevPos[0],prevPos[1]);
+            lineCanvas.lineTo(nextPos[0],nextPos[1]);
             lineCanvas.stroke();
           }
           pwdGestureOrder.push(index);// 把这个点 push 到数组里面
@@ -112,6 +118,8 @@ window.onload = function(){
           // 给该原点添加一个类，转变样式
           var tapDom = document.getElementById(posMap[index].id);
           tapDom.className = tapDom.className + " selected";
+          // 打印一下序列信息
+          console.log(pwdGestureOrder);
         }
       }
     }
