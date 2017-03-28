@@ -24,18 +24,18 @@ html,body,h1,h2,h3,h4,h5,h6,p,ul,ol,table{
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  height: 60%;
+  height: 65%;
   width: 80%;
   margin: 0 auto;
   box-sizing: border-box;
-  padding: 10% 0px;
+  padding: 5% 0px;
 }
 
 .lock-item{
   border-radius: 100%;
   border: 1px solid #000;
-  width: 3rem;
-  height: 3rem;
+  width: 3.2rem;
+  height: 3.2rem;
   margin: 0rem 0.5rem;
 }
 

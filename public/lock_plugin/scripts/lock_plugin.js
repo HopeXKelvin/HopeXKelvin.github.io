@@ -5,6 +5,8 @@ window.onload = function(){
   var lineCanvas = null;
   var mode = 1;// 表示当前处于什么模式下,1表示正在设置密码手势，0表示进入验证的状态,刚开始的默认值是1 表示设置密码
   var localStorage = window.localStorage;
+  // 每一次进入页面都要重新清空一下 localStorage
+  localStorage.clear();
   var setPwdList = [];
 
   function init(){
@@ -120,6 +122,8 @@ window.onload = function(){
               if(setPwdList.length<=0){
                 // 当前第一次设置
                 setPwdList.push(pwdGestureOrder);
+                // 第一次设置成功
+                popTips({tipsContent:"第一次设置成功"});
               }else{
                 // 第二次设置,比较前后两次是否一致
                 var secondPwdStr = pwdGestureOrder.join("");
