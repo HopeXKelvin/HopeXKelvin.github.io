@@ -325,3 +325,26 @@ Modules,模块化。模块化能够让我们定义私有的实现细节(包括�
 1. 源码分离 ---- 为了缓存和并行加载  
 
 2. 按需分析 ---- 按需进行代码分离
+
+### 兼容性时间委托代码：  
+
+```javascript
+  document.addEventListener("click",function(e){
+    e = e || window.event;
+    var target = e.target || e.srcElement;
+    // 需要默认事件
+    e.preventDefault();
+    // 阻止冒泡
+    e.stopPropagation();
+    // IE 下面执行下面的去取消默认事件和阻止冒泡
+    //  e.returnValue = false;
+    //  e.cancelBubble = true;
+    switch(target):
+      case : 1:
+        // do something
+      case : 2:
+        // do something
+      default:
+        break;
+  });
+```
