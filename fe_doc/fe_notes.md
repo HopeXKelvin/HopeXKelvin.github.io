@@ -326,7 +326,7 @@ Modules,模块化。模块化能够让我们定义私有的实现细节(包括�
 
 2. 按需分析 ---- 按需进行代码分离
 
-### 兼容性时间委托代码：  
+### 兼容性事件委托代码：  
 
 ```javascript
   document.addEventListener("click",function(e){
