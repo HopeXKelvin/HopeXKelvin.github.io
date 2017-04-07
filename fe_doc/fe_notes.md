@@ -335,3 +335,26 @@ xml,html,script,json,jsonp,text
 ### 常见浏览器端的存储技术：
 
 cookie,WebStorage(localStorage,sessionStorage),userData,indexdDB
+
+### 兼容性事件委托代码：  
+
+```javascript
+  document.addEventListener("click",function(e){
+    e = e || window.event;
+    var target = e.target || e.srcElement;
+    // 需要默认事件
+    e.preventDefault();
+    // 阻止冒泡
+    e.stopPropagation();
+    // IE 下面执行下面的去取消默认事件和阻止冒泡
+    //  e.returnValue = false;
+    //  e.cancelBubble = true;
+    switch(target):
+      case : 1:
+        // do something
+      case : 2:
+        // do something
+      default:
+        break;
+  });
+```
