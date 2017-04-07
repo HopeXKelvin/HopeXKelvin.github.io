@@ -15,6 +15,22 @@
 Please, commit your changes or stash them before you can switch branches.
 Aborting
 
+- 快速创建分支，并切换到创建好的分支下：  
+``` git checkout -b Branch_Name ```  
+等同于下面两条指令：  
+``` git branch Branch_Name
+    git checkout Branch_Name ```
+
+- 合并分支：  
+``` git checkout master
+    git merge other_branch_name ```  
+不同的分支合并情况：
+  1. 没有冲突的合并，如果某个分支比master分支向前移动了，而且主分支master可以向前移动到达这个修改过的分支上，那么就直接 merge 就可以了。这种情况下合并操作没有需要解决的分歧----这种叫做"快进(fast-forward)"
+  2. 如果此时你想合并第三个分支，而master分支已经向前移动了，不在最初的创建这个第三个分支的地方了，而且你在这个第三个分支上做了很多修改，也向前移动了。这种情况下，git会找到两个分支的工作祖先，然后进行合并
+  3. 遇到冲突时的分支合并：一般是在不同的分支下修改了相同的文件才会导致这个情况的出现。可以在合并冲突后的任意时刻使用```git status```命令查看哪些文件因为合并冲突而处于未合并(unmerged)状态的文件。任何因包含合并冲突而有待解决的文件，都会以未合并状态标识出来。
+
+- 删除分支：  
+``` git branch -d Branch_Name ```
 
 - 查看git log的有用指令：  
 ``` git log --oneline --decorate ```  
