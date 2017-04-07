@@ -7,10 +7,18 @@
 ``` git branch Branch_Name ```  
 
 - 切换分支：  
-``` git checkout Branch_Name ```
+``` git checkout Branch_Name ```  
+在切换分支的时候如果与另外的分支修改了同一个文件一半需要提交本地分支的修改，才能继续切换分支  
+强行切换会出现下面的错误提示：  
+> error: Your local changes to the following files would be overwritten by checkout:
+        fe_doc/git_learning.md
+Please, commit your changes or stash them before you can switch branches.
+Aborting
+
 
 - 查看git log的有用指令：  
-``` git log --oneline --decorate ```
+``` git log --oneline --decorate ```  
+``` git log --oneline --decorate --graph --all ```
 
 - git的 HEAD指针：  
 git有一个HEAD指针，指向当前所在的本地分支  
