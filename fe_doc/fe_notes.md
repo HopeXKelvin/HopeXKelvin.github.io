@@ -324,4 +324,14 @@ Modules,模块化。模块化能够让我们定义私有的实现细节(包括�
 ### webpack中的两种 代码分离(code splitting)的方式  
 1. 源码分离 ---- 为了缓存和并行加载  
 
-2. 按需分析 ---- 按需进行代码分离
+2. 按需分析 ---- 按需进行代码分离  
+
+### jquery ajax中支持的返回数据类型：  
+
+dataType字段支持：
+
+xml,html,script,json,jsonp,text  
+
+### 常见浏览器端的存储技术：
+
+cookie,WebStorage(localStorage,sessionStorage),userData,indexdDB
