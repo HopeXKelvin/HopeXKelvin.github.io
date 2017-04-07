@@ -1,5 +1,7 @@
 # My github.io README  
 
+> 网站地址：https://hopexkelvin.github.io/
+
 ## 简要说一下各个文件夹的分布及其意义:  
 - fe_doc文件夹下，主要存放各种个人学习FE的笔记，利用非常方便的MD格式去边写，直接推送到github.io上去，相当于个人的一个记事本，关于前端学习的。  
 
