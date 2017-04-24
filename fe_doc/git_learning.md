@@ -8,7 +8,7 @@
 
 - 切换分支：  
 ``` git checkout Branch_Name ```  
-在切换分支的时候如果与另外的分支修改了同一个文件一半需要提交本地分支的修改，才能继续切换分支  
+在切换分支的时候如果与另外的分支修改了同一个文件一般需要提交本地分支的修改，才能继续切换分支  
 强行切换会出现下面的错误提示：  
 > error: Your local changes to the following files would be overwritten by checkout:
         fe_doc/git_learning.md
