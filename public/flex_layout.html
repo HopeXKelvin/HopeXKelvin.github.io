@@ -7,7 +7,7 @@
     <style media="screen">
     html{
       width: 100%;
-      overflow: hidden;
+      /*overflow: hidden;*/
     }
     body{
       margin: 0;
@@ -15,29 +15,33 @@
     }
     ul{
       width: 100%;
-      border: 1px solid #ddd;
+      border: 1px solid #eee;
       display: flex;
       padding: 0;
+      margin: 0;
     }
     ul>li{
       list-style: none;
       flex: 1;
       text-align: center;
       box-sizing: border-box;
-      background-color: #ddd;
+      background-color: #eee;
+    }
+    .nav-item-mid{
+      border-left: 1px solid #444;
+      border-right: 1px solid #444;
     }
     main{
-      display: flex;
+      /*display: flex;*/
       width: 100%;
-      height: 200px;
       margin-bottom: 5px;
     }
     main>div{
-      flex: 1;
+      /*flex: 1;*/
       text-align: center;
-      height: 200px;
-      justify-content: center;
-      align-items: center;
+      height: 100px;
+      margin: 5px;
+      border: 1px solid #ddd;
     }
     .main-left{
       border-right: 1px solid #ddd;
@@ -45,6 +49,11 @@
     footer{
       text-align: center;
       background-color: #ddd;
+      position: fixed;
+      width: 100%;
+      box-sizing: border-box;
+      bottom: 0;
+      margin: 5px auto;
     }
     </style>
   </head>
@@ -53,16 +62,19 @@
       <nav>
         <ul>
           <li>nav-1</li>
-          <li>nav-2</li>
+          <li class="nav-item-mid">nav-2</li>
           <li>nav-3</li>
         </ul>
       </nav>
       <main>
-        <div class="main-left">
-          Main-Left
+        <div class="info-card">
+          Info-Card
         </div>
-        <div class="main-right">
-          Main-Right
+        <div class="info-card">
+          Info-Card
+        </div>
+        <div class="info-card">
+          Info-Card
         </div>
       </main>
       <footer>
