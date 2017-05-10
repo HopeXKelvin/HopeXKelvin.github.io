@@ -380,3 +380,28 @@ cookie,WebStorage(localStorage,sessionStorage),userData,indexdDB
     > 行为模式专注于改善或简化系统中不同对象之间的通信
 
     包括：Iterator(迭代器),Mediator(中介者),Observer(观察者),Visitor(访问者)
+
+### JS once function code  JS实现once函数-只执行一次的函数
+
+```javascript 
+function once(fn,context){
+  var result;
+  return function(){
+    if(fn){
+      result = fn.apply(context || this,arguments);
+      fn = null;
+    }
+    return result;
+  };
+}
+
+// use
+var onlyOnce = once(function(){
+  console.log("Do once!");
+});
+
+// can only do once!
+onlyOnce();
+onlyOnce();
+
+```
