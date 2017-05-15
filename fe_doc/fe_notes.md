@@ -405,3 +405,54 @@ onlyOnce();
 onlyOnce();
 
 ```
+
+###  Java List的使用
+
+####  List的特点：
+
+1. List长度可变，数组长度不可变
+
+2. List中可以添加任何对象，包括自己定义的类
+
+3. List是一个接口，不能直接实例化但是List下包含两个重要类ArrayList和LinkedList，需要通过ArrayList或者LinkedList才能实例化
+
+4. 通过List.add(对象) 方法可以向集合添加任何类型的数据
+
+5. 用List.get(索引序号) 方法从集合中取出数据  
+
+
+### 准确获取屏幕的宽高尺寸
+
+### Element.getBoundingClientRect()方法
+
+返回元素的大小及其相对视口的位置
+
+
+### 关于 callee
+
+每一个函数又一个 arguments，arguments除了装有函数参数之外，还有一个 callee属性，这个属性是一个指针，指针指向拥有arguments对象的函数本身
+
+下面是关于callee的一个应用示例：
+
+典型的阶乘函数用到了递归方法：
+```javascript
+	function factorial(num){
+		if(num<=1){
+			return 1;
+		}else{
+			return num*factorial(num-1);
+		}
+	}
+```
+
+这里有一个问题就是，函数的执行与函数名耦合度太高了，为了降低函数执行与函数名字的耦合度，可以利用callee，然后解决这个问题，以后不管如何命名这个阶乘函数都可以：
+
+```javascript
+	function factorial(num){
+		if(num<=1){
+			return 1;
+		}else{
+			return num * arguments.callee(num-1);
+		}
+	}
+```
