@@ -456,3 +456,37 @@ onlyOnce();
 		}
 	}
 ```
+
+### 关于ECMASCRIPT5 的属性类型：
+
+ECMA5在定义只有内部才用的特性时，描述了属性的各种特征
+
+ECMASCRIPT 中有两种属性：数据属性和访问器属性：
+
+1.数据属性：
+
+数据属性包含一个数据值的位置，在这个位置可以读取和写入值。数据属性有4个描述其行为的特性：
+
+[[Configurable]]
+
+[[Enumerable]]
+
+[[Writable]]
+
+[[Value]]
+
+要修改属性默认的特性，必须使用ECMAScript 5的Object.defineProperty()方法, 该方法接收三个参数：属性所在的对象，属性的名字， 描述符对象。其中描述符对象的属性必须是：configurable,enumerable,writable和value。设置其中的一个或者多个值，可以修改对应的特性值。
+
+2.访问器属性
+
+访问器属性不包含数据值；它们包含一对getter和setter函数。在读取访问器属性时，会调用getter函数，这个函数负责返回有效的值。在写入访问器属性时，会调用setter函数并传入新值，这个函数负责决定如何处理数据。
+
+访问器属性有如下4个特性：
+
+[[Configurable]],[[Enumerable]],[[Get]],[[Set]]
+
+访问器属性不能直接定义，必须使用Object.defineProperty()来定义。
+
+3.定义多个属性：
+
+方法：Object.defineProperties()
