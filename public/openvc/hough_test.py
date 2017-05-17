@@ -7,9 +7,10 @@ edges = cv2.Canny(gray, 50, 150,apertureSize = 3)
 
 cv2.imwrite('games-edges.jpg',edges)
 
-lines = cv2.HoughLines(edges,1,np.pi/180,200)
+lines = cv2.HoughLines(edges,1,np.pi/180,100)
+print lines
 
-print img
+# print img
 
 for rho,theta in lines[0]:
 	a = np.cos(theta)
