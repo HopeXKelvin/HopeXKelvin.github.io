@@ -76,3 +76,7 @@ git pull 会查找当前分支所跟踪的服务器与分支，从服务器上�
 跟踪远程分支
 
 checkout
+
+快速创建分支且切换到新建的分支下：
+
+``` git checkout -b new_branch ```
