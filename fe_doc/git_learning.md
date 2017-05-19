@@ -85,12 +85,11 @@ checkout
 
 ``` git merge branch_name ```
 
-<<<<<<< HEAD
 若要查看各个分支最后一个提交对象的信息、可以运行 ``` git branch -v ```
 
 查看哪些分支已经被并入当前分支 ``` git branch --merged ```
 相反作用的一条命令的参数是 --no-merged
-=======
-将新分支发不到 远端
+
+将新分支发布到 远端
+
 ``` git push origin new_branch ```
->>>>>>> test_branch
