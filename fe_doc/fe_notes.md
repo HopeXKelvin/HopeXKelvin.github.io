@@ -490,3 +490,129 @@ ECMASCRIPT 中有两种属性：数据属性和访问器属性：
 3.定义多个属性：
 
 方法：Object.defineProperties()
+
+
+### 关于this
+
+#### 关于this、有两个比较容易混淆、误解的地方
+
+- Itself
+
+很多时候 function 里面的 this 会被误解为指向function本身、实际上、这是错误的
+
+- Its Scope
+
+另一个比较会被误解的是、this指向的是function 的scope
+
+### javascript 的scope
+
+#### 什么是域
+
+JS中、域指的是代码当前的上下文语境
+
+#### 什么是全局域
+
+当开始写第一行代码的时候、你正处于我们所说的全局域中、此时我们定义个变量、那它就被定义在全局域中：
+
+```javascript
+	// global scope
+	var name = 'Kelvin';
+```
+
+#### 什么是本地域
+
+本地域指那些在全局域中定义的域、一般只有一个全局域、定义在其中的每一个函数都有自己的本地域
+
+任何定义在其他函数中的函数都有一个连接那个外部函数的本地域
+
+```javascript
+	// Scope A : Global scope out here
+	var myFunc = function(){
+		// Scope B : Local scope in here
+	};
+```
+
+ 任何属于本地域的物件对全局域都是不可见的、除非他们被暴露出去了
+
+#### 函数域
+
+在JS中所有的域都是并且只能被函数域所创建
+
+#### 词法定义域
+
+当我们在一个函数中再创建一个函数、这个内部的函数可以访问外部函数的属性、这被称为词法定义域或是闭包、有时也称作静态域
+
+#### 域链
+
+域链给一个已知的函数建立了作用域。
+
+每一个被定义的函数都有自己的嵌套作用域、同时、任何被定义在其他函数中的函数都有一个本地域域连接着外部的函数、这种连接被称作链
+
+这就是在代码中定义作用域的地方。当我们在处理一个变量的时候，JavaScript就会开始从最里层的域向外查找直到找到要找的那个变量、对象或函数。
+
+#### 作用域和 this 关键字
+
+每一个作用域都会根据函数的调用方式来绑定不同的this值
+
+#### 用 call、apply和bind来改变作用域
+
+看两个例子：
+
+- 正常的this作用域
+
+```javascript
+	var links = document.querySelectorAll('nav li');
+	for(var i=0;i<links.length;i++){
+		console.log(this);// [object window]
+	}	
+```
+
+- 利用call、apply来改变作用域
+
+```javascript
+	var links = document.querySelectorAll('nav li');
+	for(var i=0;i < links.length;i++){
+		(function(){
+			console.log(this);
+		}).call(links[i]);
+	}
+```
+
+某些情况下请使用call或apply来执行函数、而不是像下面这样去执行：
+
+```javascript
+	myFunc();
+```
+
+使用 call或apply：
+
+```javascript
+	myFunc.call(scope);
+```
+
+#### bind() 方法
+
+#### 私有域和公共域
+
+很多语言都有共有域和私有域、javascript并没有这个机制、只能通过闭包来模拟
+
+模块模式：
+
+```javascript
+	var module_1 = (function(){
+		var _privateFunc = function(){};
+	
+		var publicFunc = function(){};
+
+		var anotherPublicFunc = function(){};
+
+		return {
+			publicMethod : publicFuncm,
+			anotherMethod : anotherPublicFunc
+		}
+	})();
+
+	// call
+	module_1.publicMethod();
+
+```
