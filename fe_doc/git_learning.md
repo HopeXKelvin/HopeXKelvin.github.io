@@ -84,3 +84,6 @@ checkout
 合并分支：
 
 ``` git merge branch_name ```
+
+将新分支发不到 远端
+``` git push origin new_branch ```
