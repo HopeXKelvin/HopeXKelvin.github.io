@@ -80,3 +80,7 @@ checkout
 快速创建分支且切换到新建的分支下：
 
 ``` git checkout -b new_branch ```
+
+合并分支：
+
+``` git merge branch_name ```
