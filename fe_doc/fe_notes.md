@@ -616,3 +616,13 @@ JS中、域指的是代码当前的上下文语境
 	module_1.publicMethod();
 
 ```
+
+#### 理解原型对象
+
+无论什么时候、只要创建一个函数、就会根据一组特定的规则为该函数创建一个prototype属性、这个属性指向函数的原型对象
+
+默认情况下、所有原型对象都会自动获得一个constructor（构造函数）属性、这个属性包含一个指向prototype属性所在函数的指针
+
+相当于：function 都有一个 prototype 、prototype指向函数的原型对象、而每个原型对象都有一个constructor、它包含一个指向prototype属性所在函数的指针
+
+
