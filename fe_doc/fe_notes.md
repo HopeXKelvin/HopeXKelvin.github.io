@@ -625,4 +625,20 @@ JS中、域指的是代码当前的上下文语境
 
 相当于：function 都有一个 prototype 、prototype指向函数的原型对象、而每个原型对象都有一个constructor、它包含一个指向prototype属性所在函数的指针
 
+#### 基于h5的上传图片组件开发思路
 
+##### 基于FileReader和FormData.
+
+##### 流程
+
+1.init
+
+初始化
+
+2.render
+
+渲染dom结构
+
+3.upload
+
+上传
