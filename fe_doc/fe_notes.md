@@ -642,3 +642,25 @@ JS中、域指的是代码当前的上下文语境
 3.upload
 
 上传
+
+#### 缩写的小技巧
+
+- 当需要判断一个值不为null，undefined和空的时候,赋另一个值
+
+下面是实例：
+
+```javascript
+	var a;
+	var b = a || 'new';
+	console.log(a);// undefined
+	console.log(b);// new
+	
+	var c = 'old';
+	var d = c || 'new';
+	console.log(c);// old
+	console.log(d);// old
+```
+
+
+
+
