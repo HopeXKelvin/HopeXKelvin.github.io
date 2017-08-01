@@ -1,0 +1,222 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>vue双向数据绑定的实现</title>
+        <style>
+        #app{
+            margin: 10px auto;
+        }
+        pre{
+            background-color: #444;
+            color: #eee;
+            border: 2px solid #aaa;
+            box-sizing: border-box;
+            padding: 10px;
+            font-family: Courier New, Courier, monospace;
+        }
+        </style>
+    </head>
+    <body>
+        <div>说明-这一个非常简易的实现双向数据绑定的 例子-要实现一个完整的功能还有很多地方要完善.</div>
+        <div id="app">
+            <input type="text" id="inputText" v-model="text">
+            <!--<div id="displayBox">{{text}}</div>-->
+            {{text}}
+        </div>
+        <pre>
+        window.onload = function(){
+            console.log(123);
+        };
+        </pre>
+        <script>
+        // dom编译
+        function domCompile(node, vm){
+            var reg = /\{\{(.*)\}\}/;// 匹配一切 {{*}} 形式的字符串、()里面的内容为需要捕获的内容
+            // 判断节点类型
+            if(node.nodeType == 1){
+                // ELEMENT_NODE
+                var attr = node.attributes;
+                // 遍历属性、解析
+                for(var i=0;i<attr.length;i++){
+                    if(attr[i].nodeName == 'v-model'){
+                        var name = attr[i].nodeValue; //获取 v-model 绑定的属性名
+                        node.addEventListener('input', function(e){
+                            vm[name] = e.target.value;// 给相应的data属性赋值、从而触发该属性的set方法
+                        });
+                        node.value = vm[name]; // 将data数据赋值给表单节点
+                        node.removeAttribute('v-model');
+                    }
+                }
+            }
+
+            if(node.nodeType == 3){
+                // TEXT_NODE
+                // console.log(node.nodeValue);
+                // console.log(reg.test(node.nodeValue));
+                if(reg.test(node.nodeValue)){
+                    var name = RegExp.$1;// 获取匹配到的字符串
+                    // console.log(name);
+                    name = name.trim();
+                    // node.nodeValue = vm.data[name];// 将data的值赋给该node
+                    new Watcher(vm, node, name);
+                }
+            }
+        }
+
+        // 获取#app下的dom节点
+        function getFragment(node, vm){
+            var fragment = document.createDocumentFragment();
+            var child;
+            while(child = node.firstChild){
+                domCompile(child, vm);
+                fragment.appendChild(child);
+            }
+            return fragment;
+        }
+
+
+        // 定义响应的属性
+        function defineReactive(obj, key, val){
+            var dep = new Dep();
+
+            Object.defineProperty(obj, key, {
+                get: function(){
+                    if(Dep.target){
+                        dep.addSub(Dep.target);
+                    }
+                    return val;
+                },
+                set: function(newValue){
+                    if(newValue === val){
+                        return;//当属性值没有改变的时候、不做处理
+                    }
+                    val = newValue;
+                    dep.notify();
+                    console.log(val);
+                }
+            });
+        }
+
+        // 观察
+        function observe(obj, vm){
+            // 将obj里面的所有属性都变成vm可以访问设置的访问器属性！
+            // 即后面 obj里面的所有属性、都可以直接通过vm.key 获取到、同时也可以这样去设置
+            Object.keys(obj).forEach(function(key){
+                defineReactive(vm, key, obj[key]);
+            });
+        }
+
+        // 订阅发布者模式
+        var pub = {
+            publish: function(){
+                dep.notify();// 通知
+            }
+        };
+
+        // 主题对象-被观察者、被订阅者
+        function Dep(){
+            this.subs = [];
+        }
+
+        // 通知
+        Dep.prototype.notify = function(){
+            this.subs.forEach(function(sub){
+                sub.update();
+            });
+        };
+
+        // 添加订阅者
+        Dep.prototype.addSub = function(sub){
+            this.subs.push(sub);
+        }
+
+        // 发布者发布消息、主题对象执行notify方法、进而触发订阅者执行update方法
+        var dep = new Dep();
+        pub.publish();
+
+        // watch监听
+        function Watcher(vm, node, name){
+            Dep.target = this;
+            this.name = name;
+            this.node = node;
+            this.vm = vm;
+            this.update();
+            Dep.target = null;
+        }
+
+        Watcher.prototype = {
+            update: function(){
+                this.get();
+                this.node.nodeValue = this.value;
+            },
+            get: function(){
+                this.value = this.vm[this.name];// 触发相应属性的get
+            }
+        };
+
+        // Vue 方法
+        function Vue(options){
+            this.data = options.data;
+            var data = this.data;
+            observe(data, this);
+            var id = options.el.replace('#', '');
+            var dom = getFragment(document.getElementById(id), this);
+            // 编译完dom之后、将其appendChild回去
+            document.getElementById(id).appendChild(dom);
+        }
+
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                text: 'Hello I will tell u data binding!'
+            }
+        });
+
+
+        //----------JS-订阅者模式----------
+        var pubSub = (function(){
+            var q = {},
+                topics = {},
+                subUid = -1;
+            // 发布消息
+            q.publish = function(topic, args){
+                if(!topics[topic]){ return; };
+                var subs = topics[topic],
+                    len = subs.length;
+                while(len--){
+                    subs[len].func(topic, args);
+                }
+                return this;
+            };
+            // 订阅事件
+            q.subscribe = function(topic, func){
+                topics[topic] = topics[topic] ? topics[topic] : [];
+                var token = (++subUid).toString();
+                topics[topic].push({
+                    token: token,
+                    func: func
+                });
+                return token;
+            };
+            // 取消订阅
+
+            return q;
+        })();
+
+        // 触发的事件
+        var logmsg = function(topics, data){
+            console.log('logging: ' + topics + ':' + data);
+        };
+
+        // 监听指定的消息 'msgName'
+        var sub = pubSub.subscribe('msgName', logmsg);
+
+        // 发布消息 'msgName'
+        pubSub.publish('msgName','hey this is my publish msg!');
+        // 发布另外一个无人监听的消息
+        pubSub.publish('anotherMsg', 'Come on can u see me?');
+
+        //----------JS-订阅者模式----------
+        </script>
+    </body>
+</html>
