@@ -1,0 +1,45 @@
+body,html,div,span,p,h1,h2,h3,h4,h5,h6,ul,li,ol,table,td,tr{
+    margin: 0;
+    padding: 0;
+}
+
+.header{
+    font-size: 0.24rem;
+    text-align: center;
+}
+
+.card-box{
+    width: 90%;
+    margin: 0.1rem auto;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    height: 2rem;
+}
+
+.card-box-h{
+    font-size: 0.14rem;
+    font-weight: normal;
+}
+
+.card-box-p{
+    font-size: 0.12rem;
+    color: #999;
+    margin: 0.1rem 0;
+}
+
+.card-box-info{
+    display: flex;
+    border-top: 1px solid #ddd;
+}
+
+.card-box-info>span{
+    font-size: 0.11rem;
+    text-align: center;
+    display: inline-block;
+    flex: 1;
+}
+
+.bottom-content>p{
+    font-size: 0.14rem;
+    text-align: center
+}

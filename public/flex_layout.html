@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1.0">
+    <title>FLEX-LAYOUT</title>
+    <style media="screen">
+    html{
+      width: 100%;
+      /*overflow: hidden;*/
+    }
+    body{
+      margin: 0;
+      padding: 0;
+    }
+    ul{
+      width: 100%;
+      border: 1px solid #eee;
+      display: flex;
+      padding: 0;
+      margin: 0;
+    }
+    ul>li{
+      list-style: none;
+      flex: 1;
+      text-align: center;
+      box-sizing: border-box;
+      background-color: #eee;
+    }
+    .nav-item-mid{
+      border-left: 1px solid #444;
+      border-right: 1px solid #444;
+    }
+    main{
+      /*display: flex;*/
+      width: 100%;
+      margin-bottom: 5px;
+    }
+    main>div{
+      /*flex: 1;*/
+      text-align: center;
+      height: 100px;
+      margin: 5px;
+      border: 1px solid #ddd;
+    }
+    .main-left{
+      border-right: 1px solid #ddd;
+    }
+    footer{
+      text-align: center;
+      background-color: #ddd;
+      position: fixed;
+      width: 100%;
+      box-sizing: border-box;
+      bottom: 0;
+      margin: 5px auto;
+    }
+    </style>
+  </head>
+  <body>
+    <div class="outer">
+      <nav>
+        <ul>
+          <li>nav-1</li>
+          <li class="nav-item-mid">nav-2</li>
+          <li>nav-3</li>
+        </ul>
+      </nav>
+      <main>
+        <div class="info-card">
+          Info-Card
+        </div>
+        <div class="info-card">
+          Info-Card
+        </div>
+        <div class="info-card">
+          Info-Card
+        </div>
+      </main>
+      <footer>
+        footer
+      </footer>
+    </div>
+  </body>
+</html>
