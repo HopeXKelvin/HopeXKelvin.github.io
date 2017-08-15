@@ -6,14 +6,14 @@ Vue.component('file-uploader', {
                 '</div>',
     data: function(){
         return {
-            uploadUrl: 'http://10.8.206.21:3000/uploadfile'
+            uploadUrl: 'http://localhost:3000/uploadfile'
         };
     }
 });
 
 Vue.component('uploader-item', {
     template: '<div>'+
-                '<input type="file" class="image-loader" accept="image/*" v-on:change="uploadFile(testNum)"/><span>{{uploadUrl}}</span>'+
+                '<input name="image" type="file" class="image-loader" accept="image/*" v-on:change="uploadFile(testNum)"/><span>{{uploadUrl}}</span>'+
                 '</div>',
     props: ['uploadUrl'],// 上传图片的地址、由父组件提供
     data: function(){
