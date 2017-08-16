@@ -2,8 +2,9 @@
 
 Vue.component('file-uploader', {
     template: '<div class="uploader-wrapper">'+
-                '<uploader-item :upload-url="uploadUrl"></uploader-item>'+
+                '<uploader-item v-for="n in parseInt(uploadNum)" :key="n" :upload-url="uploadUrl"></uploader-item>'+
                 '</div>',
+    props: ['uploadNum'],
     data: function(){
         return {
             uploadUrl: 'http://localhost:3000/uploadfile'
@@ -12,18 +13,38 @@ Vue.component('file-uploader', {
 });
 
 Vue.component('uploader-item', {
-    template: '<div>'+
-                '<input name="image" type="file" class="image-loader" accept="image/*" v-on:change="uploadFile(testNum)"/><span>{{uploadUrl}}</span>'+
+    template: '<div class="uploader-box">'+
+                '<div class="pre-img-wrapper">'+
+                '<input name="image" type="file" class="image-loader-input" accept="image/*" v-on:change="uploadFile(testNum)"/>'+
+                '<div v-if="isLoaded" class="img-wrapper">'+
+                    '<span class="delete-img" @click="deleteImg"></span>'+
+                    '<img v-if="isLoaded" class="pre-img" :src="previewImgSrc" />'+
+                '</div>'+
+                '<span v-else class="pre-holder">上传图片</span>'+
+                '</div>'+
                 '</div>',
     props: ['uploadUrl'],// 上传图片的地址、由父组件提供
     data: function(){
         return {
             statusInfo: '',
+            previewImgSrc: '',
+            isLoaded: false,
             testNum: 123,
             maxSize: 4096//单位KB、限制最大图片尺寸为4MB
         };
     },
     methods: {
+        renderImg: function(src){
+            // 修改预览图片的url
+            var self = this;
+            self.previewImgSrc = src;
+            self.isLoaded = true;
+        },
+        deleteImg: function(){
+            var self = this;
+            self.previewImgSrc = '';
+            self.isLoaded = false;
+        },
         uploadFile: function(){
             var self = this;
             console.log(self.uploadUrl);
@@ -53,10 +74,18 @@ Vue.component('uploader-item', {
             });
             // 上传进行中
             xhr.addEventListener('progress', function(e){
+                // var lengthComputable = e.lengthComputable,
+                //     loaded = e.loaded,
+                //     total = e.total;
+                // statusInfo = '正在上传中...' + loaded + '/' + total;
+                // console.log(statusInfo);
+            });
+
+            xhr.upload.addEventListener('progress', function(e){
                 var lengthComputable = e.lengthComputable,
                     loaded = e.loaded,
                     total = e.total;
-                statusInfo = '正在上传中...' + loaded + '/' + total;
+                statusInfo = '正在上传中...' + (loaded/total);
                 console.log(statusInfo);
             });
             // 上传失败
@@ -70,11 +99,13 @@ Vue.component('uploader-item', {
                 statusInfo = '上传完成!';
                 console.log(resText);
                 console.log(statusInfo);
+                var dirName = 'images';
+                var imgSrc = resText.data.path.substr(resText.data.path.indexOf(dirName));
+                console.log(imgSrc);
+                self.renderImg(imgSrc);
             });
-
             // 发送数据
             xhr.send(form);
-            
             console.log('uploadFile!');
         }
     }
