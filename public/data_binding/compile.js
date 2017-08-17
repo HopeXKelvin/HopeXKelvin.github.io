@@ -4,8 +4,8 @@ function Compile(el, vm){
     this.$el = this.isElementNode(el) ? el : document.querySelector(el);
 
     if(this.$el){
-        this.$fragment = this.node2Fragment(this.$el);// 劫持dom
-        this.init();
+        this.$fragment = this.node2Fragment(this.$el);// 劫持dom、把el下面的所有dom取到、放到$fragment里面
+        this.init();// 编译dom入口函数
         this.$el.appendChild(this.$fragment);// 初始化、绑定好所有的对象后、在append回到原来的dom结构中
     }
 }
@@ -120,14 +120,18 @@ var compileUtil = {
     bind: function(node, vm, exp, dir){
         var updaterFn = updater[dir + 'Updater'];
         updaterFn && updaterFn(node, this._getVMVal(vm, exp));
-
+        // 实例化一个订阅者 Watcher
         new Watcher(vm, exp, function(value, oldValue){
             updaterFn && updaterFn(node, value, oldValue);
         });
     },
     eventHandler: function(node, vm, exp, dir){
         // 事件处理
-
+        var eventType = dir.split(':')[1],
+            fn = vm.$options.methods && vm.$options.methods[exp];
+        if(eventType && fn){
+            node.addEventListener(eventType, fn.bind(vm), false);
+        }
     },
     _getVMVal: function(vm, exp){
         var val = vm;
@@ -141,6 +145,7 @@ var compileUtil = {
         var val = vm;
         exp = exp.split('.');
         exp.forEach(function(k, i){
+            // 非最后一个key，更新val的值 ??? 懵逼了? what?
             if(i < exp.length-1){
                 val = val[k];
             }else{
@@ -150,7 +155,7 @@ var compileUtil = {
     }
 };
 
-// updater是什么鬼?
+// updater是什么鬼?------->应该是更新函数 订阅者的更新在这里.更新DOM------- 其实这里是操作dom的部分
 var updater = {
     textUpdater: function(node, value){
         node.textContent = typeof value == 'undefined' ? '' : value;
@@ -161,6 +166,10 @@ var updater = {
     classUpdater: function(node, value, oldValue){
         var className = node.className;
         className = className.replace(oldValue, '').replace(/\s$/,'');
+        var space = className && String(value) ? ' ' : '';// 空格
+        node.className = className + space + value;
     },
-    modelUpdater: function(){}
+    modelUpdater: function(node, value, oldValue){
+        node.value = typeof value == 'undefiend' ? '' : value;
+    }
 };

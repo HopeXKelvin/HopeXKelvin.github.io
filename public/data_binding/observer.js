@@ -2,80 +2,82 @@
 // 利用 Object.defineProperty()来监听属性变动、所以需要observer的数据对象进行递归遍历、包括子对象的属性、都加上setter和getter
 // 这样给这个数据对象的某个属性赋值、就会触发setter、从而监听到数据的变化
 
-/**
- * 第一版、初版代码
- */
-var data = {name: 'hope_kelvin'};
+function Observer(data){
+    this.data = data;
+    this.walk(data);
+}
 
-function observer(data){
-    if(!data || typeof data !== 'object'){
+Observer.prototype = {
+    walk: function(data){
+        var me = this;
+        // 获取data的所有属性key,遍历然后进行convert操作
+        Object.keys(data).forEach(function(key){
+            me.convert(key, data[key]);
+        });
+    },
+    convert: function(key, val){
+        this.defineReactive(this.data, key, val);
+    },
+    defineReactive: function(data, key, val){
+        var dep = new Dep();// 订阅器
+        var childObj = observer(val);// 递归遍历 绑定 设定setter和getter
+
+        Object.defineProperty(data, key, {
+            enumerable: true,
+            configurable: false,
+            get: function(){
+                if(Dep.target){
+                    dep.depend();
+                }
+            },
+            set: function(newVal){
+                if(newVal === val){// 值没有发生变化无需更新
+                    return;
+                }
+                val = newVal;
+                // 新的值若是object的话，进行监听、observer方法内部会进行判断
+                childObj = observer(newVal);
+                // 值发生改变 通知订阅者
+                dep.notify();
+            }
+        });
+    }
+};
+
+function observer(value, vm){
+    if(!value || typeof value !== 'object'){
         return;
     }
-    // 取出所有属性key、进行遍历
-    Object.keys(data).forEach(function(key){
-    });
+    return new Observer(value);
 }
 
-function defineReactive(date, key, val){
-    var dep = new Dep();
-    observer(val);// 监听子属性
-    Object.defineProperty(data, key, {
-        enumerable: true,
-        configurable: false,
-        get: function(){
-            Dep.target && dep.addSub(Dep.target);
-            return val;
-        },
-        set: function(newVal){
-            if(val === newVal){
-                return;
-            }
-            console.log('监听到值发生变化，从' + val + '------>' + newVal);
-            val = newVal;
-            dep.notify();// 通知所有订阅者
-        }
-    });
-}
+var uid = 0;
 
-// 订阅器 维护一组订阅者数组
 function Dep(){
+    this.id = uid++;
     this.subs = [];
 }
 
 Dep.prototype = {
     addSub: function(sub){
-        // 添加订阅者
         this.subs.push(sub);
     },
     depend: function(){
+        Dep.target.addDep(this);
+    },
+    removeSub: function(sub){
+        var index = this.subs.indexOf(sub);
+        if(index != -1){
+            // 删除订阅者
+            this.subs.splice(index, 1);
+        }
     },
     notify: function(){
-        // 通知
+        // 通知订阅者
         this.subs.forEach(function(sub){
             sub.update();
         });
     }
 };
 
-// 订阅者 watcher
-function Watcher(){}
-
-Watcher.prototype = {
-    update: function(){
-        this.run();
-    },
-    run: function(){
-        var value = this.get();
-        var oldVal = this.value;
-        if(value !== oldVal){
-            this.value = value;
-            this.cb.call(this.vm, value, oldVal);
-        }
-    },
-    addDep: function(){},
-    get: function(key){
-        Dep.target = this;
-        this.value = data[key];// 这里会触发属性的getter、从而添加订阅者
-        Dep.target = null;
-    }
-};
+Dep.target = null;
