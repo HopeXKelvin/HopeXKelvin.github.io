@@ -4,6 +4,8 @@
  * expOrFn 表达式或方法
  * cn 回掉函数
  */
+
+// 订阅者 Dep对象的 subs数组中维护者这些 订阅者
 function Watcher(vm, expOfFn, cb){
     this.cb = cb;
     this.vm = vm;
@@ -24,6 +26,7 @@ Watcher.prototype = {
         this.run();
     },
     run: function(){
+        // 更新视图
         var value = this.get();
         var oldVal = this.value;
         if(value !== oldVal){
@@ -39,9 +42,9 @@ Watcher.prototype = {
         }
     },
     get: function(){
-        Dep.target = this;
-        var value = this.getter.call(this.vm, this.vm);
-        Dep.target = null;
+        Dep.target = this;// 为了 触发 get。Dep.target 不为空
+        var value = this.getter.call(this.vm, this.vm);// 
+        Dep.target = null;// 设置完了 又要置为 null
         return value;
     },
     parseGetter: function(exp){

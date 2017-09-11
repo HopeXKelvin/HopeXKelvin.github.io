@@ -63,6 +63,7 @@ Dep.prototype = {
         this.subs.push(sub);
     },
     depend: function(){
+        // 添加 绑定 依赖
         Dep.target.addDep(this);
     },
     removeSub: function(sub){

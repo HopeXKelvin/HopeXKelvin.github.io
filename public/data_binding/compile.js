@@ -122,6 +122,7 @@ var compileUtil = {
         updaterFn && updaterFn(node, this._getVMVal(vm, exp));
         // 实例化一个订阅者 Watcher
         new Watcher(vm, exp, function(value, oldValue){
+            // 绑定指令上面 声明的事件
             updaterFn && updaterFn(node, value, oldValue);
         });
     },
@@ -156,20 +157,25 @@ var compileUtil = {
 };
 
 // updater是什么鬼?------->应该是更新函数 订阅者的更新在这里.更新DOM------- 其实这里是操作dom的部分
+// 首次初始化dom和后面更新dom的时候都会调用 更新视图的部分
 var updater = {
     textUpdater: function(node, value){
+        // 更新普通文本视图
         node.textContent = typeof value == 'undefined' ? '' : value;
     },
     htmlUpdater: function(node, value){
+        // 更新 html
         node.innerHTML = typeof value == 'undefined' ? '' : value;
     },
     classUpdater: function(node, value, oldValue){
+        // 更新 class
         var className = node.className;
         className = className.replace(oldValue, '').replace(/\s$/,'');
         var space = className && String(value) ? ' ' : '';// 空格
         node.className = className + space + value;
     },
     modelUpdater: function(node, value, oldValue){
+        // 更新 带输入的dom结构的数值
         node.value = typeof value == 'undefiend' ? '' : value;
     }
 };
